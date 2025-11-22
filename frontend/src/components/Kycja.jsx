@@ -29,7 +29,6 @@ function Kycja() {
         class="flex justify-center items-center w-full sm:w-[300px] md:w-[400px] lg:w-[500px]
               h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px]
               bg-white rounded-lg shadow-2xl p-8 sm:p-10 md:p-12"
-        id=""
       >
         <div>
           <p className="font-bold py-10 text-2xl">Kycu</p>
