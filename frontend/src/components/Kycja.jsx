@@ -40,7 +40,7 @@ function Kycja() {
               <input
                 type="text"
                 placeholder="Email"
-                className="border rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
+                className="border rounded-sm p-1 w-full sm:w-80 md:w-95 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                 onChange={(e) => setData({ ...data, email: e.target.value })}
               />
             </div>
@@ -50,7 +50,7 @@ function Kycja() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Fjalekalimi"
-                  className="border rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
+                  className="border rounded-sm p-1 w-full sm:w-80 md:w-95 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
                     setData({ ...data, password: e.target.value })
                   }
@@ -66,7 +66,7 @@ function Kycja() {
             </div>
             <button
               type="submit"
-              className="block border rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
+              className="block border rounded-sm p-1 w-full sm:w-80 md:w-95 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
             >
               Kycu
             </button>
