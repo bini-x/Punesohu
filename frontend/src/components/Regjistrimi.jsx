@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
 import { useState } from "react";
 
@@ -179,10 +179,7 @@ function Regjistrimi() {
                   }
                 />
               </div>
-              <button
-                type="submit"
-                className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10 hover:bg-blue-400 hover:text-white cursor-pointer"
-              >
+              <button type="submit" className="butoniKycjeRegjistrim">
                 Regjistrohu
               </button>
             </form>
@@ -248,14 +245,20 @@ function Regjistrimi() {
                   }
                 />
               </div>
-              <button
-                type="submit"
-                className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
-              >
+              <button type="submit" className="butoniKycjeRegjistrim">
                 Regjistrohu
               </button>
             </form>
           </div>
+          <div className="my-2">
+            <p className="inline">Keni Llogari? </p>
+            <Link to="/kycja" className="text-blue-600 underline">
+              Kycuni
+            </Link>
+          </div>
+          <Link to="/" className="text-blue-600 underline">
+            Ballina
+          </Link>
         </div>
       </div>
     </div>

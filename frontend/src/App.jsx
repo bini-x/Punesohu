@@ -6,6 +6,7 @@ import ListaKompanive from "./components/ListaKompanive";
 import RrethNesh from "./components/RrethNesh";
 import Kycja from "./components/Kycja";
 import Regjistrimi from "./components/Regjistrimi";
+import PublikoPune from "./components/PublikoPune";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/rrethNesh" element={<RrethNesh />} />
         <Route path="/kycja" element={<Kycja />} />
         <Route path="/regjistrimi" element={<Regjistrimi />} />
+        <Route path="/publikoPune" element={<PublikoPune />} />
       </Routes>
     </BrowserRouter>
   );
