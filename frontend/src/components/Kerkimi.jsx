@@ -1,10 +1,11 @@
 import "../App.css";
+import "../index.css";
 
 function Kerkimi() {
   return (
     <div className="kerkimi">
       <form action="">
-        <input type="text" placeholder="Kerko" />
+        <input type="text" placeholder="Kerko" className="border" />
         <label htmlFor="qyteti"></label>
         <select name="qyteti">
           <option value="koretin">Koretin</option>
