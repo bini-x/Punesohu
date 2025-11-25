@@ -88,7 +88,7 @@ function Kycja() {
             <div>
               <p className="inline">Nuk keni llogari? </p>
               <Link to="/regjistrimi" className="text-blue-600 underline">
-                Regjistrohuni
+                Regjistrohuni?
               </Link>
             </div>
             <Link to="/" className="text-blue-600 underline">
