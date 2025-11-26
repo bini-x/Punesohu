@@ -1,5 +1,5 @@
 import Header from "./Header";
-import Shpallja from "./Shpallja";
+import ShpalljaCard from "./ShpalljaCard";
 import "../index.css";
 
 function ListaPuneve() {
@@ -7,12 +7,12 @@ function ListaPuneve() {
     <div>
       <Header />
       <div className="grid grid-cols-3 justify-items-center">
-        <Shpallja />
-        <Shpallja />
-        <Shpallja />
-        <Shpallja />
-        <Shpallja />
-        <Shpallja />
+        <ShpalljaCard />
+        <ShpalljaCard />
+        <ShpalljaCard />
+        <ShpalljaCard />
+        <ShpalljaCard />
+        <ShpalljaCard />
       </div>
     </div>
   );

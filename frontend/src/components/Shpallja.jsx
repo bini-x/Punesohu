@@ -1,26 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAmazon } from "@fortawesome/free-brands-svg-icons";
-import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faBookmark } from "@fortawesome/free-regular-svg-icons";
-import "../index.css";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import Header from "./Header";
 
 function Shpallja() {
   return (
-    <div className="flex justify-center gap-7 border px-5 py-5 my-10 w-fit h-fit cursor-pointer">
-      <FontAwesomeIcon icon={faAmazon} className="text-5xl" />
-      <div className="px-5">
-        <p className="font-bold text-xl">Vendi Punes</p>
-        <p>
-          <FontAwesomeIcon icon={faBriefcase} />
-          Shitje
-        </p>
-        <p>
-          <FontAwesomeIcon icon={faLocationDot} />
-          Koretin
-        </p>
+    <div>
+      <Header />
+      <div className="flex justify-around my-20">
+        <div>
+          <div className="grid grid-cols-4">
+            <FontAwesomeIcon icon={faAmazon} className="text-5xl self-center" />
+            <p className="font-bold text-2xl">Vendi Punes</p>
+            <p className="-col-4">Kategoria</p>
+            <p>Lokacioni</p>
+            <p>Data</p>
+          </div>
+        </div>
+        <FontAwesomeIcon icon={faBookmark} />
       </div>
-      <FontAwesomeIcon icon={faBookmark} />
+      <p className="py-20">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius amet,
+        cumque iure dicta exercitationem saepe! Amet sunt blanditiis ut
+        similique fuga saepe velit, et molestiae delectus eos aliquid quam modi.
+      </p>
     </div>
   );
 }
