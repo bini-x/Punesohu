@@ -6,7 +6,7 @@ import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 function Kerkimi() {
   return (
-    <div className="w-full h-150px flex justify-center items-center">
+    <div className="h-150px flex justify-center items-center max-w-3xl mx-auto my-8 rounded-lg shadow-xl">
       <div className="kerkimi flex justify-center items-center my-5.5 bg-white">
         <form action="">
           <div className="inline">
@@ -17,7 +17,7 @@ function Kerkimi() {
             <input
               type="text"
               placeholder="Kerko"
-              className="px-2 h-14 w-4xl border"
+              className="px-2 h-14 w-auto"
             />
           </div>
 
@@ -54,7 +54,7 @@ function Kerkimi() {
           </div>
           <button
             type="submit"
-            className="w-30 h-10 mx-8 border rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+            className="w-30 h-10 mx-8 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
           >
             Kerko
           </button>
