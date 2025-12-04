@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Regjistrimi() {
   const navigate = useNavigate();
@@ -21,52 +22,42 @@ function Regjistrimi() {
     konfirmoFjalekalimin: "",
   });
 
-  const validateForm = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (tipiPerdoruesit === "aplikant") {
-      if (!dataAplikant.emri) {
-        alert("sheno emrin");
-        return;
-      }
-      if (!dataAplikant.mbiemri) {
-        alert("sheno mbiemrin");
-        return;
-      }
-      if (!dataAplikant.email) {
-        alert("sheno emailin");
-        return;
-      }
-      if (!dataAplikant.fjalekalimi) {
-        alert("sheno fjalekalimin");
-        return;
-      }
-      if (!dataAplikant.konfirmoFjalekalimin) {
-        alert("sheno fjalekalimin");
-        return;
-      }
-    } else if (tipiPerdoruesit === "punedhenes") {
-      if (!dataPunedhenesi.kompania) {
-        alert("sheno kompanine");
-        return;
-      }
-      if (!dataPunedhenesi.email) {
-        alert("sheno emailin");
-        return;
-      }
-      if (!dataPunedhenesi.fjalekalimi) {
-        alert("sheno fjalekalimin");
-        return;
-      }
-      if (!dataPunedhenesi.konfirmoFjalekalimin) {
-        alert("sheno fjalekalimin persdyti");
-        return;
-      }
-    } else {
-      alert("selekto tipin");
-      return;
-    }
 
-    navigate("/");
+    try {
+      let dataToSend;
+
+      if (tipiPerdoruesit === "aplikant") {
+        dataToSend = {
+          tipi: "aplikant",
+          emri: dataAplikant.emri,
+          mbiemri: dataAplikant.mbiemri,
+          email: dataAplikant.email,
+          fjalekalimi: dataAplikant.fjalekalimi,
+        };
+      } else if (tipiPerdoruesit === "punedhenes") {
+        dataToSend = {
+          tipi: "punedhenes",
+          kompania: dataPunedhenesi.kompania,
+          email: dataPunedhenesi.email,
+          fjalekalimi: dataPunedhenesi.fjalekalimi,
+        };
+      }
+
+      const response = await axios.post(
+        "http://localhost:3000/api/regjistrimi/perdoruesi",
+        dataToSend,
+      );
+
+      if (response.data.success) {
+        alert("BERI!");
+
+        navigate("/");
+      }
+    } catch (err) {
+      console.log("err: ", err);
+    }
   };
 
   return (
@@ -117,7 +108,7 @@ function Regjistrimi() {
                 : "hidden"
             }
           >
-            <form onSubmit={validateForm} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label htmlFor="emri">Emri</label>
                 <input
@@ -188,7 +179,7 @@ function Regjistrimi() {
           <div
             className={tipiPerdoruesit === "punedhenes" ? "block" : "hidden"}
           >
-            <form onSubmit={validateForm} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label htmlFor="kompania">Kompania</label>
                 <input

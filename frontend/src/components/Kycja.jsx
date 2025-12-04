@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons/faEyeSlash";
+import axios from "axios";
 
 function Kycja() {
   const navigate = useNavigate();
@@ -17,22 +18,34 @@ function Kycja() {
     email: "",
     password: "",
   });
-  console.log(data);
 
-  console.log(data.password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const validateForm = () => {
-    if (!data.email) {
-      alert("sheno email");
-      return;
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/kycja",
+        data,
+      );
+      console.log("success", response.data);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
     }
-    if (!data.password) {
-      alert("sheno password");
-      return;
-    }
-
-    navigate("/");
   };
+
+  // const validateForm = () => {
+  //   if (!data.email) {
+  //     alert("sheno email");
+  //     return;
+  //   }
+  //   if (!data.password) {
+  //     alert("sheno password");
+  //     return;
+  //   }
+  //
+  //   navigate("/");
+  // };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -45,7 +58,7 @@ function Kycja() {
           <h1 className="font-bold text-4xl flex justify-center items-center mb-2 sm:mb-6 md:mb-9">
             Kycu
           </h1>
-          <form onSubmit={validateForm} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="email" className="block">
                 Email
