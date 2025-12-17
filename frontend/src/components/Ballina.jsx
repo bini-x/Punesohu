@@ -98,12 +98,8 @@ function Ballina() {
             <Header />
             <div className="flex space-x-4 ml-auto items-center">
               <Link to={`/profili/${perdoruesiData._id}`}>
-                {perdoruesiData.emri ? (
-                  <FontAwesomeIcon icon={faUser} />
-                ) : (
-                  <FontAwesomeIcon icon={faBriefcase} />
-                )}
-                {perdoruesiData.emri || perdoruesiData.kompania}
+                <FontAwesomeIcon icon={faBriefcase} />
+                {perdoruesiData.kompania}
               </Link>
               <button
                 type="button"
