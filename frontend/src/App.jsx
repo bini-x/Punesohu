@@ -8,6 +8,7 @@ import Kycja from "./components/Kycja";
 import Regjistrimi from "./components/Regjistrimi";
 import PublikoPune from "./components/PublikoPune";
 import Shpallja from "./components/Shpallja";
+import Profili from "./components/Profili";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/kycja" element={<Kycja />} />
         <Route path="/regjistrimi" element={<Regjistrimi />} />
         <Route path="/publikoPune" element={<PublikoPune />} />
-        <Route path="/shpallja" element={<Shpallja />} />
+        <Route path="/shpallja/:id" element={<Shpallja />} />
+        <Route path="/profili/:id" element={<Profili />} />
       </Routes>
     </BrowserRouter>
   );

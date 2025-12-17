@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Regjistrimi() {
   const navigate = useNavigate();
@@ -21,58 +22,55 @@ function Regjistrimi() {
     konfirmoFjalekalimin: "",
   });
 
-  const validateForm = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (tipiPerdoruesit === "aplikant") {
-      if (!dataAplikant.emri) {
-        alert("sheno emrin");
-        return;
-      }
-      if (!dataAplikant.mbiemri) {
-        alert("sheno mbiemrin");
-        return;
-      }
-      if (!dataAplikant.email) {
-        alert("sheno emailin");
-        return;
-      }
-      if (!dataAplikant.fjalekalimi) {
-        alert("sheno fjalekalimin");
-        return;
-      }
-      if (!dataAplikant.konfirmoFjalekalimin) {
-        alert("sheno fjalekalimin");
-        return;
-      }
-    } else if (tipiPerdoruesit === "punedhenes") {
-      if (!dataPunedhenesi.kompania) {
-        alert("sheno kompanine");
-        return;
-      }
-      if (!dataPunedhenesi.email) {
-        alert("sheno emailin");
-        return;
-      }
-      if (!dataPunedhenesi.fjalekalimi) {
-        alert("sheno fjalekalimin");
-        return;
-      }
-      if (!dataPunedhenesi.konfirmoFjalekalimin) {
-        alert("sheno fjalekalimin persdyti");
-        return;
-      }
-    } else {
-      alert("selekto tipin");
-      return;
-    }
 
-    navigate("/");
+    try {
+      let dataToSend;
+
+      if (!tipiPerdoruesit) {
+        alert("Zgjedh tipin");
+        return;
+      }
+
+      if (tipiPerdoruesit === "aplikant") {
+        dataToSend = {
+          tipiPerdoruesit: "aplikant",
+          emri: dataAplikant.emri,
+          mbiemri: dataAplikant.mbiemri,
+          email: dataAplikant.email,
+          fjalekalimi: dataAplikant.fjalekalimi,
+        };
+      } else if (tipiPerdoruesit === "punedhenes") {
+        dataToSend = {
+          tipiPerdoruesit: "punedhenes",
+          kompania: dataPunedhenesi.kompania,
+          email: dataPunedhenesi.email,
+          fjalekalimi: dataPunedhenesi.fjalekalimi,
+        };
+      }
+
+      const response = await axios.post(
+        "http://localhost:3000/api/regjistrimi/perdoruesi",
+        dataToSend,
+      );
+
+      if (response.data.success) {
+        alert(response.data.message);
+        navigate("/");
+      }
+    } catch (err) {
+      if (err.response.data.error.includes("ekziston")) {
+        alert("Perdoruesi ekziston!");
+      }
+      console.log("err: ", err);
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div
-        class="flex justify-center items-center w-full sm:w-[500px] md:w-[600px] lg:w-[650px]
+        className="flex justify-center items-center w-full sm:w-[500px] md:w-[600px] lg:w-[650px]
                       transition-all duration-300 ease-in-out
                       bg-white rounded-lg shadow-2xl p-6 sm:p-8 md:p-10"
       >
@@ -87,6 +85,7 @@ function Regjistrimi() {
             >
               <span className="text-sm sm:text-xl ">Aplikant</span>
               <input
+                id="aplikant"
                 type="radio"
                 name="tipiPerdoruesit"
                 value="aplikant"
@@ -101,6 +100,7 @@ function Regjistrimi() {
             >
               <span className="text-sm sm:text-xl ">Punedhenes</span>
               <input
+                id="punedhenes"
                 type="radio"
                 name="tipiPerdoruesit"
                 value="punedhenes"
@@ -117,10 +117,11 @@ function Regjistrimi() {
                 : "hidden"
             }
           >
-            <form onSubmit={validateForm} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label htmlFor="emri">Emri</label>
                 <input
+                  id="emri"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
@@ -131,6 +132,7 @@ function Regjistrimi() {
               <div>
                 <label htmlFor="mbiemri">Mbiemri</label>
                 <input
+                  id="mbiemri"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
@@ -144,6 +146,7 @@ function Regjistrimi() {
               <div>
                 <label htmlFor="email">Email</label>
                 <input
+                  id="email"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
@@ -154,6 +157,7 @@ function Regjistrimi() {
               <div>
                 <label htmlFor="fjalekalimi">Fjalekalimi</label>
                 <input
+                  id="fjalekalimi"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
@@ -169,6 +173,7 @@ function Regjistrimi() {
                   Konfirmo Fjalekalimin
                 </label>
                 <input
+                  id="konfirmoFjalekalimin"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
@@ -188,10 +193,11 @@ function Regjistrimi() {
           <div
             className={tipiPerdoruesit === "punedhenes" ? "block" : "hidden"}
           >
-            <form onSubmit={validateForm} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label htmlFor="kompania">Kompania</label>
                 <input
+                  id="kompania"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   placeholder="Kompania"
@@ -206,6 +212,7 @@ function Regjistrimi() {
               <div>
                 <label htmlFor="email">Email</label>
                 <input
+                  id="email"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   placeholder="Email"
@@ -220,6 +227,7 @@ function Regjistrimi() {
               <div>
                 <label htmlFor="fjalekalimi">Fjalekalimi</label>
                 <input
+                  id="fjalekalimi"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
@@ -235,6 +243,7 @@ function Regjistrimi() {
                   Konfirmo Fjalekalimin
                 </label>
                 <input
+                  id="konfirmoFjalekalimin"
                   type="text"
                   className="border block rounded-sm p-1 w-full sm:w-80 md:w-96 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons/faEyeSlash";
+import axios from "axios";
 
 function Kycja() {
   const navigate = useNavigate();
@@ -15,23 +16,27 @@ function Kycja() {
 
   const [data, setData] = useState({
     email: "",
-    password: "",
+    fjalekalimi: "",
   });
-  console.log(data);
 
-  console.log(data.password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const validateForm = () => {
-    if (!data.email) {
-      alert("sheno email");
-      return;
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/kycja/perdoruesi",
+        data,
+        { withCredentials: true },
+      );
+      console.log("success", response.data);
+      navigate("/");
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+    } catch (err) {
+      if (err.response.data.error.includes("nuk ekziston")) {
+        alert("Perdoruesi nuk ekziston");
+      }
+      console.log(err);
     }
-    if (!data.password) {
-      alert("sheno password");
-      return;
-    }
-
-    navigate("/");
   };
 
   return (
@@ -45,12 +50,13 @@ function Kycja() {
           <h1 className="font-bold text-4xl flex justify-center items-center mb-2 sm:mb-6 md:mb-9">
             Kycu
           </h1>
-          <form onSubmit={validateForm} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="email" className="block">
                 Email
               </label>
               <input
+                id="email"
                 type="text"
                 placeholder="Email"
                 className="border rounded-sm p-1 w-full sm:w-80 md:w-95 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
@@ -61,11 +67,12 @@ function Kycja() {
               <label htmlFor="fjalekalimi">Fjalekalimi</label>
               <div className="relative">
                 <input
+                  id="fjalekalimi"
                   type={showPassword ? "text" : "password"}
                   placeholder="Fjalekalimi"
                   className="border rounded-sm p-1 w-full sm:w-80 md:w-95 lg:w-[350px] h-10 sm:h-12 md:h-14 lg:h-10"
                   onChange={(e) =>
-                    setData({ ...data, password: e.target.value })
+                    setData({ ...data, fjalekalimi: e.target.value })
                   }
                 />
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
