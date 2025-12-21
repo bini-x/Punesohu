@@ -7,6 +7,8 @@ import Header from "./Header";
 function Profili() {
   const [perdoruesiData, setPerdoruesiData] = useState({});
   const [shpalljaData, setShpalljaData] = useState([]);
+  // const [klikimiShpalljes, setKlikimiShpalljes] = useState(false);
+  const [shpalljaKlikuar, setShpalljaKlikuar] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -58,6 +60,10 @@ function Profili() {
     console.log("shpallja: ", shpalljaData);
   }, [shpalljaData]);
 
+  const hapShpalljen = (e) => {
+    setShpalljaKlikuar(e);
+  };
+
   if (!perdoruesiData) {
     return (
       <div>
@@ -77,16 +83,36 @@ function Profili() {
       <p>{perdoruesiData.email}</p>
       {shpalljaData.map((sh) => {
         return (
-          <div className="border m-2 p-2">
+          <div
+            className="border m-2 p-2"
+            key={sh._id}
+            onClick={() => hapShpalljen(sh)}
+          >
             <h3>Shpallja e Punes:</h3>
             <div className="border m-2 p-2">
               <p>Pozita e Punes: {sh.pozitaPunes}</p>
               <p>Lokacioni: {sh.lokacioniPunes}</p>
               <p>Niveli: {sh.niveliPunes}</p>
             </div>
+            <button
+              className="publikoPune cursor-pointer"
+              type="button"
+              onClick={() => hapShpalljen(sh)}
+            >
+              Shiko Me Shume
+            </button>
           </div>
         );
       })}
+
+      {shpalljaKlikuar && (
+        <div className="border absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-xl">
+          <p>Pozita e punes: {shpalljaKlikuar.pozitaPunes}</p>
+          <p>Lokacioni: {shpalljaKlikuar.lokacioniPunes}</p>
+          <p>Niveli: {shpalljaKlikuar.niveliPunes}</p>
+          <p>Pershkrimi: {shpalljaKlikuar.pershkrimiPunes}</p>
+        </div>
+      )}
     </div>
   );
 }
