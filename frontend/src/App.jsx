@@ -10,6 +10,7 @@ import PublikoPune from "./components/PublikoPune";
 import Shpallja from "./components/Shpallja";
 import Profili from "./components/Profili";
 import VerifikoEmail from "./components/VerifikoEmail";
+import Aplikimi from "./components/Aplikimi";
 
 function App() {
   return (
@@ -24,7 +25,9 @@ function App() {
         <Route path="/publikoPune" element={<PublikoPune />} />
         <Route path="/shpallja/:id" element={<Shpallja />} />
         <Route path="/profili/:id" element={<Profili />} />
-        <Route path="/verifikoemail" element={<VerifikoEmail />} />
+        <Route path="/verifiko" element={<VerifikoEmail />} />
+        <Route path="/shpallja/:id/aplikimi" element={<Aplikimi />} /> // Todo:
+        change path
       </Routes>
     </BrowserRouter>
   );

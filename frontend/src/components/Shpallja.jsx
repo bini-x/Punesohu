@@ -6,9 +6,10 @@ import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Shpallja() {
+  const navigate = useNavigate();
   const [shpallja, setShpallja] = useState(null);
   const { id } = useParams();
 
@@ -76,6 +77,14 @@ function Shpallja() {
           </div>
         </div>
         <p className="top-20 max-w-xl">{shpallja.pershkrimiPunes}</p>
+
+        <button
+          type="button"
+          className="publikoPune"
+          onClick={() => navigate(`/shpallja/${id}/aplikimi`)}
+        >
+          Apliko
+        </button>
       </div>
     </div>
   );

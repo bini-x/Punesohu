@@ -6,7 +6,7 @@
 }
 
 .publikoPune {
-  @apply px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors duration-200;
+  @apply px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors duration-200 cursor-pointer;
 }
 
 .kycja {

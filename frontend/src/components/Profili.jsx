@@ -3,6 +3,8 @@ import "../index.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 function Profili() {
   const [perdoruesiData, setPerdoruesiData] = useState({});
@@ -100,7 +102,8 @@ function Profili() {
     }
   };
 
-  const ruajNdryshimet = async () => {
+  const ruajNdryshimet = async (e) => {
+    e.preventDefault();
     try {
       await axios.put(
         `http://localhost:3000/api/shpallja/${shpalljaKlikuar._id}`,
@@ -152,53 +155,55 @@ function Profili() {
 
       {shpalljaKlikuar && (
         <div className="border absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-xl">
-          <label htmlFor="pozitaPunes">Pozita e punes:</label>
-          <input
-            id="pozitaPunes"
-            type="text"
-            value={shpalljaKlikuar.pozitaPunes || ""}
-            onChange={modifikoShpalljen}
-            className="border"
-          />
-          <label htmlFor="lokacioniPunes">Lokacioni i punes:</label>
-          <input
-            id="lokacioniPunes"
-            type="text"
-            value={shpalljaKlikuar.lokacioniPunes || ""}
-            onChange={modifikoShpalljen}
-            className="border"
-          />
+          <form onSubmit={ruajNdryshimet}>
+            <label htmlFor="pozitaPunes">Pozita e punes:</label>
+            <input
+              id="pozitaPunes"
+              type="text"
+              value={shpalljaKlikuar.pozitaPunes || ""}
+              onChange={modifikoShpalljen}
+              className="border"
+            />
+            <label htmlFor="lokacioniPunes">Lokacioni i punes:</label>
+            <input
+              id="lokacioniPunes"
+              type="text"
+              value={shpalljaKlikuar.lokacioniPunes || ""}
+              onChange={modifikoShpalljen}
+              className="border"
+            />
 
-          <label htmlFor="niveliPunes">Niveli i punes:</label>
-          <input
-            id="niveliPunes"
-            type="text"
-            value={shpalljaKlikuar.niveliPunes || ""}
-            onChange={modifikoShpalljen}
-            className="border"
-          />
-          <label htmlFor="pershkrimiPunes">Pershkrimi i punes:</label>
-          <textarea
-            id="pershkrimiPunes"
-            type="text"
-            value={shpalljaKlikuar.pershkrimiPunes || ""}
-            onChange={modifikoShpalljen}
-            className="border"
-          />
-          <button
-            type="button"
-            className="publikoPune bg-red-500! cursor-pointer"
-            onClick={() => fshijShpalljen(shpalljaKlikuar._id)}
-          >
-            Fshij Shpalljen
-          </button>
-          <button
-            type="button"
-            className="publikoPune cursor-pointer"
-            onClick={ruajNdryshimet}
-          >
-            Perfundo
-          </button>
+            <label htmlFor="niveliPunes">Niveli i punes:</label>
+            <input
+              id="niveliPunes"
+              type="text"
+              value={shpalljaKlikuar.niveliPunes || ""}
+              onChange={modifikoShpalljen}
+              className="border"
+            />
+            <label htmlFor="pershkrimiPunes">Pershkrimi i punes:</label>
+            <textarea
+              id="pershkrimiPunes"
+              type="text"
+              value={shpalljaKlikuar.pershkrimiPunes || ""}
+              onChange={modifikoShpalljen}
+              className="border"
+            />
+            <button
+              type="button"
+              className="publikoPune bg-red-500! cursor-pointer"
+              onClick={() => fshijShpalljen(shpalljaKlikuar._id)}
+            >
+              Fshij Shpalljen
+            </button>
+            <button type="submit" className="publikoPune cursor-pointer">
+              Perfundo
+            </button>
+          </form>
+          <FontAwesomeIcon
+            icon={faX}
+            onClick={() => setShpalljaKlikuar(null)}
+          ></FontAwesomeIcon>
         </div>
       )}
     </div>

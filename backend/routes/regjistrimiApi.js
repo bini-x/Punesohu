@@ -76,6 +76,7 @@ router.post("/perdoruesi", async (req, res) => {
     } else {
       return res.status(400).json({
         success: false,
+        error: "Tipi nuk eshte zgjedhur ose ka ndodhur ndonje gabim!",
       });
     }
 
@@ -97,7 +98,7 @@ router.post("/perdoruesi", async (req, res) => {
   }
 });
 
-router.post("/verifiko-dhe-krijo", async (req, res) => {
+router.post("/verifiko", async (req, res) => {
   try {
     const { email, kodi } = req.body;
 
@@ -105,7 +106,7 @@ router.post("/verifiko-dhe-krijo", async (req, res) => {
 
     if (perdoruesiPerkohshem.kodiVerifikimit !== kodi) {
       return res.status(400).json({
-        success: failes,
+        success: false,
         error: "Kodi eshte gabim",
       });
     }
@@ -128,13 +129,13 @@ router.post("/verifiko-dhe-krijo", async (req, res) => {
     await PerdoruesPerkohshem.findOneAndDelete({ email });
 
     return res.status(200).json({
-      status: true,
+      success: true,
       message: "Perdoruesi u regjistrua me sukses",
       user: perdoruesiRuajtur,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Gabim i brendshem i serverit",
       error: error.message,
