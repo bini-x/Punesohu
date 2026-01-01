@@ -57,7 +57,13 @@ function Regjistrimi() {
 
       if (response.data.success) {
         alert(response.data.message);
-        navigate("/");
+
+        if (tipiPerdoruesit === "aplikant") {
+          localStorage.setItem("emailForVerification", dataAplikant.email);
+        } else if (tipiPerdoruesit === "punedhenes") {
+          localStorage.setItem("emailForVerification", dataPunedhenesi.email);
+        }
+        navigate("/verifiko");
       }
     } catch (err) {
       if (err.response.data.error.includes("ekziston")) {

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const perdoruesSchema = new mongoose.Schema({
+const perdoruesPerkohshemSchema = new mongoose.Schema({
   tipiPerdoruesit: {
     type: String,
     enum: ["aplikant", "punedhenes"],
@@ -32,7 +32,26 @@ const perdoruesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  eshteVerifikuar: {
+    type: Boolean,
+    default: false,
+  },
+  kodiVerifikimit: {
+    type: String,
+  },
+  skadimiKoditVerfikimit: {
+    type: Date,
+  },
+  dataRegjistrimit: {
+    type: Date,
+    default: Date.now,
+    expires: 3600,
+  },
 });
 
-const Perdorues = mongoose.model("Perdorues", perdoruesSchema, "perdoruesit");
-module.exports = Perdorues;
+const PerdoruesPerkohshem = mongoose.model(
+  "PerdoruesPerkohshem",
+  perdoruesPerkohshemSchema,
+  "perdoruesitPerkohshem",
+);
+module.exports = PerdoruesPerkohshem;
