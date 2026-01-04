@@ -137,8 +137,14 @@ function PublikoPune() {
                 <option value="" disabled>
                   Kategoria
                 </option>
-                <option value="administrate">Administrate</option>
-                <option value="it">IT</option>
+                <option value="Administrate">Administrate</option>
+                <option value="IT">IT</option>
+                <option value="Dizajner">Dizajner</option>
+                <option value="Infermieri">Infermieri</option>
+                <option value="Edukim">Edukim</option>
+                <option value="Shitje dhe Marketing">
+                  Shitje dhe Marketing
+                </option>
               </select>
             </div>
             <div className="col-span-1">
@@ -175,7 +181,7 @@ function PublikoPune() {
                 <option value="Praktike">Praktikë</option>
                 <option value="Fillestar">Fillestar</option>
                 <option value="Junior">Junior</option>
-                <option value="Mid">Mid-Level</option>
+                <option value="Mid-Level">Mid-Level</option>
                 <option value="Senior">Senior</option>
                 <option value="Lider">Lider</option>
                 <option value="Menaxher">Menaxher</option>
