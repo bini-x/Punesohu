@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAmazon } from "@fortawesome/free-brands-svg-icons";
-import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import "../index.css";
@@ -14,23 +14,40 @@ function ShpalljaCard({ shpallja }) {
   };
 
   return (
-    <div
-      className="flex justify-center gap-7 border border-gray-200 hover:bg-gray-200 shadow-xl px-5 py-5 my-10 w-fit h-fit cursor-pointer mx-5"
-      onClick={handleClick}
-    >
-      <FontAwesomeIcon icon={faAmazon} className="text-5xl" />
-      <div className="px-5">
-        <p className="font-bold text-xl">{shpallja.pozitaPunes}</p>
-        <p>
-          <FontAwesomeIcon icon={faBriefcase} />
-          {shpallja.kategoriaPunes}
-        </p>
-        <p>
+    <div className="border border-gray-200 hover:bg-gray-200 shadow-xl rounded-xl p-10 w-full cursor-pointer ">
+      <div className="flex justify-between">
+        <div className="flex items-center gap-4">
+          <FontAwesomeIcon icon={faUser} className="text-4xl" />
+          <p className="paragraf font-bold !text-xl">{shpallja.pozitaPunes}</p>
+        </div>
+        <FontAwesomeIcon icon={faBookmark} className="text-xl" />
+      </div>
+
+      <div className="mt-5">
+        <p className="paragraf">
           <FontAwesomeIcon icon={faLocationDot} />
           {shpallja.lokacioniPunes}
         </p>
       </div>
-      <FontAwesomeIcon icon={faBookmark} />
+
+      <div className="grid grid-cols-3 mt-8">
+        <p className="paragraf">{shpallja.kategoriaPunes}</p>
+        <p className="paragraf">{shpallja.niveliPunes}</p>
+        <p className="paragraf">
+          <FontAwesomeIcon icon={faDollarSign} />
+          1000
+        </p>
+      </div>
+      <p className="line-clamp-3 mt-10 py-2">{shpallja.pershkrimiPunes}</p>
+
+      <div className="place-self-end mt-5">
+        <button
+          className="border border-gray-200 rounded-4xl p-2 cursor-pointer"
+          onClick={handleClick}
+        >
+          Shiko Detajet
+        </button>
+      </div>
     </div>
   );
 }
