@@ -24,5 +24,9 @@
   @apply text-gray-600 px-1 font-semibold;
 }
 .paragraf {
-  @apply text-lg;
+  @apply text-base;
+}
+
+.info {
+  @apply text-gray-600 text-sm;
 }
