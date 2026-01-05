@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAmazon } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faBookmark, faClock } from "@fortawesome/free-regular-svg-icons";
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import Header from "./Header";
-import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -45,49 +45,147 @@ function Shpallja() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100">
       <Header />
-      <div className="relative grid grid-cols-2 place-items-center">
-        <div className="bg-[#E3E3E3] w-7xl my-2 rounded-2xl col-span-2">
-          <div className="flex justify-around gap-100 my-20 max-w-7xl">
-            <div>
-              <div className="grid grid-cols-4 grid-rows-2">
-                <div className="flex row-span-2 items-center justify-start">
-                  <FontAwesomeIcon
-                    icon={faAmazon}
-                    className="text-5xl self-center"
-                  />
-                </div>
-                <p className="font-bold text-2xl">{shpallja.pozitaPunes}</p>
-                <p className="-col-4">
-                  <FontAwesomeIcon icon={faBriefcase} />
-                  {shpallja.kategoriaPunes.toUpperCase()}
-                </p>
-                <p>
-                  <FontAwesomeIcon icon={faLocationDot} />
-                  {shpallja.lokacioniPunes}
-                </p>
-                <p>
-                  <FontAwesomeIcon icon={faClock} />
-                  Data
-                </p>
-              </div>
+      <div className="max-w-6xl mx-auto p-4 md:p-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-1/4">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-10">
+              <nav className="space-y-2">
+                <a
+                  href="#info-bazike"
+                  className="flex items-center p-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  <span>Informacione Bazike</span>
+                </a>
+                <a
+                  href="#pershkrimi"
+                  className="flex items-center p-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  <span>Pershkrimi i Punës</span>
+                </a>
+                <a
+                  href="#pergjegjesite"
+                  className="flex items-center p-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  <span>Përgjegjësitë</span>
+                </a>
+                <a
+                  href="#kerkesat"
+                  className="flex items-center p-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  <span>Kërkesat</span>
+                </a>
+                <a
+                  href="#aplikimi"
+                  className="flex items-center p-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  <span>Aplikimi</span>
+                </a>
+              </nav>
             </div>
-            <FontAwesomeIcon icon={faBookmark} className="text-xl" />
+          </div>
+
+          <div className="lg:w-3/4">
+            <div className="bg-white rounded-2xl shadow-sm p-6">
+              <section id="info-bazike" className="mb-8">
+                <div className="flex justify-between">
+                  <div className="flex items-center gap-2">
+                    <FontAwesomeIcon icon={faUser} className="text-4xl" />
+                    <p className="font-bold text-2xl">{shpallja.pozitaPunes}</p>
+                  </div>
+                  <FontAwesomeIcon icon={faBookmark} className="text-xl" />
+                </div>
+
+                <div className="mt-5"></div>
+
+                <div className="grid grid-cols-3 w-fit gap-4">
+                  <p className="info">
+                    <FontAwesomeIcon icon={faClock} className="mr-2" />
+                    Full Time
+                  </p>
+                  <p className="info">
+                    <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
+                    {shpallja.lokacioniPunes}
+                  </p>
+                  <p className="info">
+                    <FontAwesomeIcon icon={faDollarSign} className="mr-2" />
+                    EUR 1k-2.5k/muaj
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 w-fit gap-6 mb-8 mt-8">
+                  <button
+                    type="button"
+                    className="publikoPune"
+                    onClick={() => navigate(`/shpallja/${id}/aplikimi`)}
+                  >
+                    Apliko
+                  </button>
+                  <button
+                    type="button"
+                    className="border border-gray-400 rounded-lg py-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                  >
+                    Ngarko CV
+                  </button>
+                </div>
+
+                <div className="border border-gray-300 rounded-lg p-3 grid grid-cols-5 gap-2 items-center mt-4 mb-4">
+                  <div className="text-center">
+                    <p className="font-medium text-gray-700">Eksperienca</p>
+                    <p className="text-lg font-bold mt-1">
+                      {shpallja.eksperienca || "1-2 vjet"}
+                    </p>
+                  </div>
+
+                  <div className="h-8 w-px bg-gray-400 mx-auto"></div>
+
+                  <div className="text-center">
+                    <p className="font-medium text-gray-700">Aplikante</p>
+                    <p className="text-lg font-bold mt-1">
+                      {shpallja.aplikante || "24"}
+                    </p>
+                  </div>
+
+                  <div className="h-8 w-px bg-gray-400 mx-auto"></div>
+
+                  <div className="text-center">
+                    <p className="font-medium text-gray-700">Niveli</p>
+                    <p className="text-lg font-bold mt-1">
+                      {shpallja.niveliPunes}
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                id="pershkrimi"
+                className="mb-8 pt-8 border-t border-gray-200"
+              >
+                <h1 className="text-xl font-bold mb-3">Pershkrimi i Punës</h1>
+                <p className="text-gray-700 leading-relaxed">
+                  {shpallja.pershkrimiPunes}
+                </p>
+              </section>
+
+              <section
+                id="pergjegjesite"
+                className="mb-8 pt-8 border-t border-gray-200"
+              >
+                <h1 className="text-xl font-bold mb-3">Përgjegjësitë</h1>
+              </section>
+
+              <section
+                id="kerkesat"
+                className="mb-8 pt-8 border-t border-gray-200"
+              >
+                <h1 className="text-xl font-bold mb-3">Kërkesat</h1>
+              </section>
+            </div>
           </div>
         </div>
-        <p className="top-20 max-w-xl">{shpallja.pershkrimiPunes}</p>
-
-        <button
-          type="button"
-          className="publikoPune"
-          onClick={() => navigate(`/shpallja/${id}/aplikimi`)}
-        >
-          Apliko
-        </button>
       </div>
     </div>
   );
 }
-
 export default Shpallja;

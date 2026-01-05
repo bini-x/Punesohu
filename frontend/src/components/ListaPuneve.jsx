@@ -25,10 +25,12 @@ function ListaPuneve() {
   return (
     <div>
       <Header />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 m-10 md:m-15 lg:m-20">
-        {shpalljaData.map((shpallja) => {
-          return <ShpalljaCard key={shpallja._id} shpallja={shpallja} />;
-        })}
+      <div className="m-10 md:m-20 lg:m-30">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 m-10 md:m-15 lg:m-20">
+          {shpalljaData.map((shpallja) => {
+            return <ShpalljaCard key={shpallja._id} shpallja={shpallja} />;
+          })}
+        </div>
       </div>
     </div>
   );

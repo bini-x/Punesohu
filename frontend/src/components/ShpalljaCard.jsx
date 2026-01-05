@@ -14,10 +14,10 @@ function ShpalljaCard({ shpallja }) {
   };
 
   return (
-    <div className="border border-gray-200 hover:bg-gray-200 shadow-xl rounded-xl p-10 w-full cursor-pointer ">
+    <div className="border border-gray-200 hover:bg-gray-200 shadow-xl rounded-xl p-4 w-full cursor-pointer ">
       <div className="flex justify-between">
-        <div className="flex items-center gap-4">
-          <FontAwesomeIcon icon={faUser} className="text-4xl" />
+        <div className="flex items-center gap-2">
+          <FontAwesomeIcon icon={faUser} className="text-3xl" />
           <p className="paragraf font-bold !text-xl">{shpallja.pozitaPunes}</p>
         </div>
         <FontAwesomeIcon icon={faBookmark} className="text-xl" />
@@ -30,7 +30,7 @@ function ShpalljaCard({ shpallja }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 mt-8">
+      <div className="grid grid-cols-3 mt-4">
         <p className="paragraf">{shpallja.kategoriaPunes}</p>
         <p className="paragraf">{shpallja.niveliPunes}</p>
         <p className="paragraf">
@@ -38,7 +38,7 @@ function ShpalljaCard({ shpallja }) {
           1000
         </p>
       </div>
-      <p className="line-clamp-3 mt-10 py-2">{shpallja.pershkrimiPunes}</p>
+      <p className="line-clamp-2 mt-3 ">{shpallja.pershkrimiPunes}</p>
 
       <div className="place-self-end mt-5">
         <button

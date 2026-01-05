@@ -150,19 +150,21 @@ function Ballina() {
           </div>
 
           <Kerkimi />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 m-10 md:m-15 lg:m-20">
-            {shpalljaData.map((shpallja) => {
-              return <ShpalljaCard key={shpallja._id} shpallja={shpallja} />;
-            })}
-            {shpalljaData.length === 0 && (
-              <div className="text-center p-10">
-                <p>
-                  {kerkoParams.toString()
-                    ? "Nuk u gjet asnjë punë me këto kërkime"
-                    : "Nuk ka punë të disponueshme"}
-                </p>
-              </div>
-            )}{" "}
+          <div className="m-10 md:m-20 lg:m-30">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 m-10 md:m-15 lg:m-20">
+              {shpalljaData.map((shpallja) => {
+                return <ShpalljaCard key={shpallja._id} shpallja={shpallja} />;
+              })}
+              {shpalljaData.length === 0 && (
+                <div className="text-center p-10">
+                  <p>
+                    {kerkoParams.toString()
+                      ? "Nuk u gjet asnjë punë me këto kërkime"
+                      : "Nuk ka punë të disponueshme"}
+                  </p>
+                </div>
+              )}{" "}
+            </div>
           </div>
         </>
       )}
