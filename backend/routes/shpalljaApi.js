@@ -75,9 +75,18 @@ router.post("/kompania", async (req, res) => {
     pershkrimiPunes,
     pyetjet,
     niveliPunes,
-    llojiPunesimit,
+    orari,
     eksperienca,
+    pagaPrej,
+    pagaDeri,
   } = req.body;
+
+  if (pagaDeri < pagaPrej) {
+    return res.status(400).json({
+      success: false,
+      error: "Rangu i pages gabim!",
+    });
+  }
 
   console.log(
     emailKompanise,
@@ -87,8 +96,10 @@ router.post("/kompania", async (req, res) => {
     pershkrimiPunes,
     pyetjet,
     niveliPunes,
-    llojiPunesimit,
+    orari,
     eksperienca,
+    pagaPrej,
+    pagaDeri,
   );
 
   const shpallja = new Shpallja({
@@ -99,8 +110,10 @@ router.post("/kompania", async (req, res) => {
     pershkrimiPunes,
     pyetjet: pyetjet || [],
     niveliPunes,
-    llojiPunesimit,
+    orari,
     eksperienca,
+    pagaPrej,
+    pagaDeri,
   });
 
   const shpalljaPunes = await shpallja.save();

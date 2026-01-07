@@ -135,7 +135,7 @@ function Shpallja() {
                   <div className="text-center">
                     <p className="font-medium text-gray-700">Eksperienca</p>
                     <p className="text-lg font-bold mt-1">
-                      {shpallja.eksperienca || "1-2 vjet"}
+                      {shpallja.eksperienca || ""}
                     </p>
                   </div>
 
@@ -144,7 +144,7 @@ function Shpallja() {
                   <div className="text-center">
                     <p className="font-medium text-gray-700">Aplikante</p>
                     <p className="text-lg font-bold mt-1">
-                      {shpallja.aplikante || "24"}
+                      {shpallja.aplikante || "0"}
                     </p>
                   </div>
 

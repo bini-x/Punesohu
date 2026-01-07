@@ -16,14 +16,15 @@ function PublikoPune() {
     lokacioniPunes: "",
     pershkrimiPunes: "",
     niveliPunes: "",
-    llojiPunesimit: [],
+    orari: [],
     eksperienca: "",
+    pagaPrej: 0,
+    pagaDeri: 0,
   });
 
   const employmentTypes = [
-    { value: "Fulltime", label: "Fulltime" },
-    { value: "Part-time", label: "Part-time" },
-    { value: "Praktike", label: "Praktike" },
+    { value: "fulltime", label: "Full-Time" },
+    { value: "part-time", label: "Part-Time" },
   ];
 
   const shtoPyetjen = () => {
@@ -40,20 +41,18 @@ function PublikoPune() {
 
   // qetu
   const handleEmploymentTypeChange = (typeValue) => {
-    setFormData((prev) => {
-      const currentTypes = prev.llojiPunesimit || [];
-
-      if (currentTypes.includes(typeValue)) {
+    setFormData((prevState) => {
+      if (prevState.orari && prevState.orari.includes(typeValue)) {
         return {
-          ...prev,
-          llojiPunesimit: currentTypes.filter((type) => type !== typeValue),
-        };
-      } else {
-        return {
-          ...prev,
-          llojiPunesimit: [...currentTypes, typeValue],
+          ...prevState,
+          orari: [],
         };
       }
+
+      return {
+        ...prevState,
+        orari: [typeValue],
+      };
     });
   };
   // dej qetu
@@ -97,9 +96,15 @@ function PublikoPune() {
       pershkrimiPunes: formData.pershkrimiPunes,
       pyetjet: pyetjet,
       niveliPunes: formData.niveliPunes,
-      llojiPunesimit: formData.llojiPunesimit,
+      orari: formData.orari,
       eksperienca: formData.eksperienca,
+      pagaPrej: formData.pagaPrej,
+      pagaDeri: formData.pagaDeri,
     };
+
+    if (dataToSend.pagaDeri < dataToSend.pagaPrej) {
+      alert("Rangu i pages eshte gabim!");
+    }
 
     const response = await axios.post(
       "http://localhost:3000/api/shpallja/kompania",
@@ -116,8 +121,10 @@ function PublikoPune() {
         lokacioniPunes: "",
         pershkrimiPunes: "",
         niveliPunes: "",
-        llojiPunesimit: [],
+        orari: [],
         eksperienca: "",
+        pagaPrej: 0,
+        pagaDeri: 0,
       });
       setPyetjet([]);
       setPyetjaTanishme("");
@@ -138,7 +145,7 @@ function PublikoPune() {
         <form onSubmit={handleSubmit} className="grid gap-4 p-10">
           <div>
             <label htmlFor="pozitaPunes" className="label">
-              Emri
+              Emri <span className="text-red-400">*</span>
             </label>
             <input
               className="input"
@@ -166,12 +173,12 @@ function PublikoPune() {
                 <option value="" disabled>
                   Kategoria
                 </option>
-                <option value="Administrate">Administrate</option>
+                <option value="administrate">Administrate</option>
                 <option value="it">IT</option>
-                <option value="Dizajner">Dizajner</option>
-                <option value="Infermieri">Infermieri</option>
-                <option value="Edukim">Edukim</option>
-                <option value="Shitje dhe Marketing">
+                <option value="dizajner">Dizajner</option>
+                <option value="infermieri">Infermieri</option>
+                <option value="edukim">Edukim</option>
+                <option value="shitje dhe marketing">
                   Shitje dhe Marketing
                 </option>
               </select>
@@ -191,14 +198,14 @@ function PublikoPune() {
                 <option value="" disabled>
                   Zgjedh Nivelin
                 </option>
-                <option value="Praktike">Praktikë</option>
-                <option value="Fillestar">Fillestar</option>
-                <option value="Junior">Junior</option>
-                <option value="Mid-Level">Mid-Level</option>
-                <option value="Senior">Senior</option>
-                <option value="Lider">Lider</option>
-                <option value="Menaxher">Menaxher</option>
-                <option value="Drejtor">Drejtor</option>
+                <option value="praktike">Praktikë</option>
+                <option value="fillestar">Fillestar</option>
+                <option value="junior">Junior</option>
+                <option value="mid-level">Mid-Level</option>
+                <option value="senior">Senior</option>
+                <option value="lider">Lider</option>
+                <option value="menaxher">Menaxher</option>
+                <option value="drejtor">Drejtor</option>
               </select>
             </div>
           </div>
@@ -206,27 +213,52 @@ function PublikoPune() {
           <hr className="border-gray-400 mt-10" />
 
           <h1 className="text-xl md:text-2xl mt-6">Informacione Shtese</h1>
-          <div className="mt-4">
-            <label className="label block mb-2">Lloji i Punësimit</label>
-            <div className="flex flex-wrap gap-3">
-              {employmentTypes.map((type) => (
-                <button
-                  key={type.value}
-                  type="button"
-                  onClick={() => handleEmploymentTypeChange(type.value)}
-                  className={`
+          <div className="flex">
+            <div className="mt-4">
+              <label className="label block mb-2">Orari</label>
+              <div className="flex flex-wrap gap-3">
+                {employmentTypes.map((type) => (
+                  <button
+                    key={type.value}
+                    type="button"
+                    onClick={() => handleEmploymentTypeChange(type.value)}
+                    className={`
                     px-4 py-2.5 rounded-md border-2 text-sm font-medium
                     transition-all duration-200 ease-in-out
                     ${
-                      (formData.llojiPunesimit || []).includes(type.value)
+                      (formData.orari || []).includes(type.value)
                         ? "bg-blue-500 text-white border-blue-500 shadow-sm"
                         : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
                     }
                   `}
-                >
-                  {type.label}
-                </button>
-              ))}
+                  >
+                    {type.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4">
+              <label htmlFor="paga" className="label block mb-2">
+                Paga
+              </label>
+              <input
+                id="paga"
+                type="number"
+                className="border"
+                onChange={(e) =>
+                  setFormData({ ...formData, pagaPrej: Number(e.target.value) })
+                }
+                placeholder="prej"
+              />
+              <input
+                id="paga"
+                type="number"
+                className="border"
+                onChange={(e) =>
+                  setFormData({ ...formData, pagaDeri: Number(e.target.value) })
+                }
+                placeholder="deri"
+              />
             </div>
           </div>
 

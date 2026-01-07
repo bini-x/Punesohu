@@ -35,7 +35,7 @@ function ShpalljaCard({ shpallja }) {
         <div>
           <p className="text-l font-semibold flex items-center">
             <FontAwesomeIcon icon={faDollarSign} className="mr-1" />
-            1k-2.5k/muaj
+            {shpallja.pagaPrej}-{shpallja.pagaDeri}
           </p>
           <p className="paragraf text-sm text-gray-600 flex items-center mt-1">
             <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
