@@ -13,7 +13,7 @@ const shpalljaSchema = new mongoose.Schema({
     type: String,
     enum: [
       "Administrate",
-      "IT",
+      "it",
       "Dizajner",
       "Infermieri",
       "Edukim",

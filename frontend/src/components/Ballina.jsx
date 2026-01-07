@@ -144,9 +144,7 @@ function Ballina() {
           </div>
 
           <div className="flex justify-center items-center text-5xl my-15">
-            <h1 className="">
-              Gjeni punen perfekte per ju {perdoruesiData?.emri}
-            </h1>
+            <h1 className="">Gjeni punen perfekte per ju</h1>
           </div>
 
           <Kerkimi />

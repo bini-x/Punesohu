@@ -13,29 +13,30 @@ import VerifikoEmail from "./components/VerifikoEmail";
 import Aplikimi from "./components/Aplikimi";
 import Footeri from "./components/Footeri";
 
-
 function App() {
   return (
-   <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Ballina />} />
-        <Route path="/listaPuneve" element={<ListaPuneve />} />
-        <Route path="/listaKompanive" element={<ListaKompanive />} />
-        <Route path="/rrethNesh" element={<RrethNesh />} />
-        <Route path="/kycja" element={<Kycja />} />
-        <Route path="/regjistrimi" element={<Regjistrimi />} />
-        <Route path="/publikoPune" element={<PublikoPune />} />
-        <Route path="/shpallja/:id" element={<Shpallja />} />
-        <Route path="/profili/:id" element={<Profili />} />
-        <Route path="/verifiko" element={<VerifikoEmail />} />
-        {/* TODO: change path */}
-        <Route path="/shpallja/:id/aplikimi" element={<Aplikimi />} />
-      </Routes>
-
-      {/* FOOTER GLOBAL */}
+    <div className="min-h-screen flex flex-col">
+      <BrowserRouter>
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Ballina />} />
+            <Route path="/listaPuneve" element={<ListaPuneve />} />
+            <Route path="/listaKompanive" element={<ListaKompanive />} />
+            <Route path="/rrethNesh" element={<RrethNesh />} />
+            <Route path="/kycja" element={<Kycja />} />
+            <Route path="/regjistrimi" element={<Regjistrimi />} />
+            <Route path="/publikoPune" element={<PublikoPune />} />
+            <Route path="/shpallja/:id" element={<Shpallja />} />
+            <Route path="/profili/:id" element={<Profili />} />
+            <Route path="/verifiko" element={<VerifikoEmail />} />
+            <Route path=":id/aplikimi" element={<Aplikimi />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
       <Footeri />
-    </BrowserRouter>
+    </div>
   );
 }
 
 export default App;
+

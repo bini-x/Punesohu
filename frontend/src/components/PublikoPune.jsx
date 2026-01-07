@@ -167,7 +167,7 @@ function PublikoPune() {
                   Kategoria
                 </option>
                 <option value="Administrate">Administrate</option>
-                <option value="IT">IT</option>
+                <option value="it">IT</option>
                 <option value="Dizajner">Dizajner</option>
                 <option value="Infermieri">Infermieri</option>
                 <option value="Edukim">Edukim</option>

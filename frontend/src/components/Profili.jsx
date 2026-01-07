@@ -195,286 +195,293 @@ function Profili() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 m-10 md:m-15 lg:m-20">
-      {shpalljaData.map((sh) => {
-        return (
-          <div className="" key={sh._id}>
-            <div className="border border-gray-200 rounded-2xl">
-              <div className="grid grid-cols-1 min-[370px]:grid-cols-2 items-center px-6 my-6">
-                <h1 className="text-base sm:text-lg min-[md]:text-xl min-[lg]:text-2xl font-medium truncate">
-                  {sh.pozitaPunes}
-                </h1>
+    <div>
+      <h1> {perdoruesiData.emri || perdoruesiData.kompania}</h1>
+      <h2>{perdoruesiData.mbiemri}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 m-10 md:m-15 lg:m-20">
+        {shpalljaData.map((sh) => {
+          return (
+            <div className="" key={sh._id}>
+              <div className="border border-gray-200 rounded-2xl">
+                <div className="grid grid-cols-1 min-[370px]:grid-cols-2 items-center px-6 my-6">
+                  <h1 className="text-base sm:text-lg min-[md]:text-xl min-[lg]:text-2xl font-medium truncate">
+                    {sh.pozitaPunes}
+                  </h1>
 
-                <div className="min-[370px]:justify-self-end">
+                  <div className="min-[370px]:justify-self-end">
+                    <button
+                      className="border border-gray-200 px-4 py-2 rounded-lg cursor-pointer"
+                      type="button"
+                      onClick={() => hapShpalljen(sh)}
+                    >
+                      Detajet
+                    </button>
+                  </div>
+                </div>
+
+                <div className="border border-[#f8f8f9] bg-[#f8f8f9] rounded-2xl p-4 md:p-6 m-2">
+                  <div className="grid min-[365px]:grid-cols-2 min-[434px]:grid-cols-3 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                    <p className="flex items-center gap-2">
+                      <span>📍</span>
+                      {sh.lokacioniPunes}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <span>💼</span>
+                      {sh.niveliPunes}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <span>⏳</span>
+                      {sh.llojiPunesimit}
+                    </p>
+                    <div className="grid col-span-2 text-sm text-gray-500 ">
+                      Publikuar{" "}
+                      {new Date(sh.dataKrijimit).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">
+                      {numriAplikimeve[sh._id] || 0} Aplikant
+                    </p>
+                  </div>
+                </div>
+
+                <div className="py-4 md:py-6 px-2">
                   <button
-                    className="border border-gray-200 px-4 py-2 rounded-lg cursor-pointer"
-                    type="button"
-                    onClick={() => hapShpalljen(sh)}
+                    className="w-full border border-gray-200 p-3 md:p-2 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors"
+                    onClick={(e) => shfaqAplikantPopup(e, sh)}
                   >
-                    Detajet
+                    Aplikantet
                   </button>
                 </div>
               </div>
+            </div>
+          );
+        })}
 
-              <div className="border border-[#f8f8f9] bg-[#f8f8f9] rounded-2xl p-4 md:p-6 m-2">
-                <div className="grid min-[365px]:grid-cols-2 min-[434px]:grid-cols-3 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-                  <p className="flex items-center gap-2">
-                    <span>📍</span>
-                    {sh.lokacioniPunes}
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <span>💼</span>
-                    {sh.niveliPunes}
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <span>⏳</span>
-                    {sh.llojiPunesimit}
-                  </p>
-                  <div className="grid col-span-2 text-sm text-gray-500 ">
-                    Publikuar{" "}
-                    {new Date(sh.dataKrijimit).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+        {shpalljaKlikuar && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg w-fit overflow-y-auto shadow-xl">
+              <div className="bg-[#f8f8f9] p-6 flex justify-between items-center">
+                <h2 className="text-xl font-bold">Modifiko Shpalljen</h2>
+                <FontAwesomeIcon
+                  icon={faX}
+                  className="cursor-pointer text-xl hover:text-gray-700"
+                  onClick={() => setShpalljaKlikuar(null)}
+                />
+              </div>
+
+              <div className="p-6">
+                <form onSubmit={ruajNdryshimet} className="space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="pozitaPunes"
+                        className="block text-sm font-medium text-gray-600 mb-2"
+                      >
+                        Pozita e punes
+                      </label>
+                      <input
+                        id="pozitaPunes"
+                        type="text"
+                        value={shpalljaKlikuar.pozitaPunes || ""}
+                        onChange={modifikoShpalljen}
+                        className="w-full py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-lg font-semibold"
+                        placeholder="Senior Full Stack Developer"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="niveliPunes"
+                        className="block text-sm font-medium text-gray-600 mb-2"
+                      >
+                        Niveli i punes
+                      </label>
+                      <input
+                        id="niveliPunes"
+                        type="text"
+                        value={shpalljaKlikuar.niveliPunes || ""}
+                        onChange={modifikoShpalljen}
+                        className="w-full py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-lg font-semibold"
+                        placeholder="Full-time"
+                      />
+                    </div>
                   </div>
-                  <p className="text-sm font-medium text-gray-700">
-                    {numriAplikimeve[sh._id] || 0} Aplikant
-                  </p>
-                </div>
-              </div>
 
-              <div className="py-4 md:py-6 px-2">
-                <button
-                  className="w-full border border-gray-200 p-3 md:p-2 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors"
-                  onClick={(e) => shfaqAplikantPopup(e, sh)}
-                >
-                  Aplikantet
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-
-      {shpalljaKlikuar && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-fit overflow-y-auto shadow-xl">
-            <div className="bg-[#f8f8f9] p-6 flex justify-between items-center">
-              <h2 className="text-xl font-bold">Modifiko Shpalljen</h2>
-              <FontAwesomeIcon
-                icon={faX}
-                className="cursor-pointer text-xl hover:text-gray-700"
-                onClick={() => setShpalljaKlikuar(null)}
-              />
-            </div>
-
-            <div className="p-6">
-              <form onSubmit={ruajNdryshimet} className="space-y-6">
-                <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label
-                      htmlFor="pozitaPunes"
+                      htmlFor="lokacioniPunes"
                       className="block text-sm font-medium text-gray-600 mb-2"
                     >
-                      Pozita e punes
+                      Lokacioni i punes
                     </label>
                     <input
-                      id="pozitaPunes"
+                      id="lokacioniPunes"
                       type="text"
-                      value={shpalljaKlikuar.pozitaPunes || ""}
+                      value={shpalljaKlikuar.lokacioniPunes || ""}
                       onChange={modifikoShpalljen}
-                      className="w-full py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-lg font-semibold"
-                      placeholder="Senior Full Stack Developer"
+                      className="w-full py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                      placeholder="Pristina, Kosovo"
                     />
                   </div>
 
                   <div>
                     <label
-                      htmlFor="niveliPunes"
+                      htmlFor="llojiPunes"
                       className="block text-sm font-medium text-gray-600 mb-2"
                     >
-                      Niveli i punes
+                      Lloji i Punes
                     </label>
                     <input
-                      id="niveliPunes"
+                      id="llojiPunes"
                       type="text"
-                      value={shpalljaKlikuar.niveliPunes || ""}
+                      value={shpalljaKlikuar.llojiPunes || ""}
                       onChange={modifikoShpalljen}
-                      className="w-full py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-lg font-semibold"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
                       placeholder="Full-time"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label
-                    htmlFor="lokacioniPunes"
-                    className="block text-sm font-medium text-gray-600 mb-2"
-                  >
-                    Lokacioni i punes
-                  </label>
-                  <input
-                    id="lokacioniPunes"
-                    type="text"
-                    value={shpalljaKlikuar.lokacioniPunes || ""}
-                    onChange={modifikoShpalljen}
-                    className="w-full py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
-                    placeholder="Pristina, Kosovo"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="llojiPunes"
-                    className="block text-sm font-medium text-gray-600 mb-2"
-                  >
-                    Lloji i Punes
-                  </label>
-                  <input
-                    id="llojiPunes"
-                    type="text"
-                    value={shpalljaKlikuar.llojiPunes || ""}
-                    onChange={modifikoShpalljen}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
-                    placeholder="Full-time"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="pershkrimiPunes"
-                    className="block text-sm font-medium text-gray-600 mb-2"
-                  >
-                    Pershkrimi i punes
-                  </label>
-                  <textarea
-                    id="pershkrimiPunes"
-                    value={shpalljaKlikuar.pershkrimiPunes || ""}
-                    onChange={modifikoShpalljen}
-                    rows="5"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors resize-none"
-                    placeholder="Looking for an experienced full stack developer..."
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-6">
-                  <button
-                    type="button"
-                    className="publikoPune bg-red-500 cursor-pointer"
-                    onClick={() => fshijShpalljen(shpalljaKlikuar._id)}
-                  >
-                    Fshij Shpalljen
-                  </button>
-                  <button type="submit" className="publikoPune cursor-pointer">
-                    Perfundo
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {shfaqPopupAplikanteve && shpalljaZgjedhurPerAplikante && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl">
-            <div className="bg-[#f8f8f9] p-6 flex justify-between items-center sticky top-0">
-              <h2 className="text-xl font-bold">
-                Aplikimet për {shpalljaZgjedhurPerAplikante.pozitaPunes}
-              </h2>
-              <FontAwesomeIcon
-                icon={faX}
-                className="cursor-pointer text-xl hover:text-gray-700"
-                onClick={mbyllAplikantPopup}
-              />
-            </div>
-
-            <div className="p-6">
-              <h4 className="font-bold mb-4 text-lg">
-                Total Aplikimet: {aplikimet.length}
-              </h4>
-
-              {aplikimet.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">
-                  Nuk ka aplikime për këtë pozitë
-                </p>
-              ) : (
-                <div className="space-y-3">
-                  {aplikimet.map((a) => (
-                    <div
-                      key={a._id}
-                      className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                  <div>
+                    <label
+                      htmlFor="pershkrimiPunes"
+                      className="block text-sm font-medium text-gray-600 mb-2"
                     >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <p className="font-medium text-lg">
-                            {a.emriAplikantit} {a.mbiemriAplikantit}
-                          </p>
-                          <p className="text-sm text-gray-600 mt-1">
-                            {a.emailAplikantit}
-                          </p>
+                      Pershkrimi i punes
+                    </label>
+                    <textarea
+                      id="pershkrimiPunes"
+                      value={shpalljaKlikuar.pershkrimiPunes || ""}
+                      onChange={modifikoShpalljen}
+                      rows="5"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors resize-none"
+                      placeholder="Looking for an experienced full stack developer..."
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6">
+                    <button
+                      type="button"
+                      className="publikoPune bg-red-500 cursor-pointer"
+                      onClick={() => fshijShpalljen(shpalljaKlikuar._id)}
+                    >
+                      Fshij Shpalljen
+                    </button>
+                    <button
+                      type="submit"
+                      className="publikoPune cursor-pointer"
+                    >
+                      Perfundo
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {shfaqPopupAplikanteve && shpalljaZgjedhurPerAplikante && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl">
+              <div className="bg-[#f8f8f9] p-6 flex justify-between items-center sticky top-0">
+                <h2 className="text-xl font-bold">
+                  Aplikimet për {shpalljaZgjedhurPerAplikante.pozitaPunes}
+                </h2>
+                <FontAwesomeIcon
+                  icon={faX}
+                  className="cursor-pointer text-xl hover:text-gray-700"
+                  onClick={mbyllAplikantPopup}
+                />
+              </div>
+
+              <div className="p-6">
+                <h4 className="font-bold mb-4 text-lg">
+                  Total Aplikimet: {aplikimet.length}
+                </h4>
+
+                {aplikimet.length === 0 ? (
+                  <p className="text-gray-500 text-center py-8">
+                    Nuk ka aplikime për këtë pozitë
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {aplikimet.map((a) => (
+                      <div
+                        key={a._id}
+                        className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg">
+                              {a.emriAplikantit} {a.mbiemriAplikantit}
+                            </p>
+                            <p className="text-sm text-gray-600 mt-1">
+                              {a.emailAplikantit}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            className="publikoPune ml-4"
+                            onClick={() => hapAplikimin(a)}
+                          >
+                            Shiko Me Shume
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          className="publikoPune ml-4"
-                          onClick={() => hapAplikimin(a)}
-                        >
-                          Shiko Me Shume
-                        </button>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {aplikimiKlikuar && (
+          <div className="fixed inset-0 flex items-center justify-center z-60">
+            <div className="bg-white rounded-lg w-11/12 max-w-xl shadow-xl">
+              <div className="bg-[#f8f8f9] p-6 flex justify-between items-center">
+                <h2 className="text-xl font-bold">Detajet e Aplikantit</h2>
+                <FontAwesomeIcon
+                  icon={faX}
+                  className="cursor-pointer text-xl hover:text-gray-700"
+                  onClick={() => setAplikimiKlikuar(null)}
+                />
+              </div>
+
+              <div className="p-6 space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600">Emri</p>
+                  <p className="text-lg font-medium">
+                    {aplikimiKlikuar.emriAplikantit}
+                  </p>
                 </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {aplikimiKlikuar && (
-        <div className="fixed inset-0 flex items-center justify-center z-60">
-          <div className="bg-white rounded-lg w-11/12 max-w-xl shadow-xl">
-            <div className="bg-[#f8f8f9] p-6 flex justify-between items-center">
-              <h2 className="text-xl font-bold">Detajet e Aplikantit</h2>
-              <FontAwesomeIcon
-                icon={faX}
-                className="cursor-pointer text-xl hover:text-gray-700"
-                onClick={() => setAplikimiKlikuar(null)}
-              />
-            </div>
-
-            <div className="p-6 space-y-4">
-              <div>
-                <p className="text-sm text-gray-600">Emri</p>
-                <p className="text-lg font-medium">
-                  {aplikimiKlikuar.emriAplikantit}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Mbiemri</p>
-                <p className="text-lg font-medium">
-                  {aplikimiKlikuar.mbiemriAplikantit}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Email</p>
-                <p className="text-lg font-medium">
-                  {aplikimiKlikuar.emailAplikantit}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Eksperienca</p>
-                <p className="text-lg font-medium">N/A</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Niveli</p>
-                <p className="text-lg font-medium">N/A</p>
+                <div>
+                  <p className="text-sm text-gray-600">Mbiemri</p>
+                  <p className="text-lg font-medium">
+                    {aplikimiKlikuar.mbiemriAplikantit}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Email</p>
+                  <p className="text-lg font-medium">
+                    {aplikimiKlikuar.emailAplikantit}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Eksperienca</p>
+                  <p className="text-lg font-medium">N/A</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Niveli</p>
+                  <p className="text-lg font-medium">N/A</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

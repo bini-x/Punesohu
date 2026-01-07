@@ -14,7 +14,10 @@ function ShpalljaCard({ shpallja }) {
   };
 
   return (
-    <div className="border border-gray-200 hover:bg-gray-200 shadow-xl rounded-xl p-4 w-full cursor-pointer ">
+    <div
+      className="border border-gray-200 hover:bg-gray-200 shadow-xl rounded-xl p-4 w-full cursor-pointer "
+      onClick={handleClick}
+    >
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <FontAwesomeIcon icon={faUser} className="text-3xl" />

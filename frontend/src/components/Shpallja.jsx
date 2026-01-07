@@ -47,6 +47,7 @@ function Shpallja() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
+      <h1>{shpallja.emailKompanise}</h1>
       <div className="max-w-6xl mx-auto p-4 md:p-8">
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/4">
@@ -118,7 +119,7 @@ function Shpallja() {
                   <button
                     type="button"
                     className="publikoPune"
-                    onClick={() => navigate(`/shpallja/${id}/aplikimi`)}
+                    onClick={() => navigate(`/${id}/aplikimi`)}
                   >
                     Apliko
                   </button>

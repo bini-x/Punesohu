@@ -32,10 +32,6 @@ const perdoruesPerkohshemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  eshteVerifikuar: {
-    type: Boolean,
-    default: false,
-  },
   kodiVerifikimit: {
     type: String,
   },
