@@ -72,46 +72,31 @@ function KonfigurimetLlogarise() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-xl shadow-lg">
-  <p className="text-2xl font-bold text-gray-800 mb-6 text-center">Konfigurimet</p>
-  <form onSubmit={handleSubmit} className="space-y-4">
-    <div className="space-y-2">
-      <label htmlFor="email" className="block font-medium text-gray-700">
-        Perditeso email
-      </label>
-      <input
-        id="email"
-        type="text"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-        onChange={modifikoProfilin}
-      />
+    <div>
+      <p> Konfigurimet</p>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Perditeso email</label>
+        <input
+          id="email"
+          type="text"
+          className="border"
+          onChange={modifikoProfilin}
+        />
+        <label htmlFor="fjalekalimi">Perditeso fjalekalimin</label>
+        <input
+          id="fjalekalimi"
+          type="text"
+          className="border"
+          onChange={modifikoProfilin}
+        />
+        <input id="fjalekalimi" type="text" className="border" />
+        <label htmlFor=""></label>
+        <input type="text" />
+        <button type="submit" className="publikoPune">
+          Perfundo
+        </button>
+      </form>
     </div>
-    
-    <div className="space-y-2">
-      <label htmlFor="fjalekalimi" className="block font-medium text-gray-700">
-        Perditeso fjalekalimin
-      </label>
-      <input
-        id="fjalekalimi"
-        type="text"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-        onChange={modifikoProfilin}
-      />
-    </div>
-    
-    <input 
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" 
-      type="text" 
-    />
-    
-    <button 
-      type="submit" 
-      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
-    >
-      Perfundo
-    </button>
-  </form>
-</div>
   );
 }
 
