@@ -6,6 +6,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
 function KonfigurimetLlogarise() {
   const [perdoruesiData, setPerdoruesiData] = useState({});
     const [showPassword, setShowPassword] = useState(false);
