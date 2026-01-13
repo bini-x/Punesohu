@@ -22,7 +22,7 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 
-function MenaxhoShpalljet() {
+function MenaxhoAplikimet() {
   const [perdoruesiData, setPerdoruesiData] = useState({});
   const [shpalljaData, setShpalljaData] = useState([]);
   const [shpalljaKlikuar, setShpalljaKlikuar] = useState(null);
@@ -513,7 +513,7 @@ function MenaxhoShpalljet() {
                       type="text"
                       value={shpalljaKlikuar.pozitaPunes}
                       onChange={modifikoShpalljen}
-                      className="input-ShpalljaProfil"
+                      className="input-MenaxhoAplikimet"
                       placeholder="Senior Full Stack Developer"
                     />
                   </div>
@@ -530,7 +530,7 @@ function MenaxhoShpalljet() {
                       type="text"
                       value={shpalljaKlikuar.niveliPunes || ""}
                       onChange={modifikoShpalljen}
-                      className="input-ShpalljaProfil"
+                      className="input-MenaxhoAplikimet"
                       placeholder="Full-time"
                     />
                   </div>
@@ -548,7 +548,7 @@ function MenaxhoShpalljet() {
                     type="text"
                     value={shpalljaKlikuar.lokacioniPunes || ""}
                     onChange={modifikoShpalljen}
-                    className="input-ShpalljaProfil"
+                    className="input-MenaxhoAplikimet"
                     placeholder="Pristina, Kosovo"
                   />
                 </div>
@@ -565,7 +565,7 @@ function MenaxhoShpalljet() {
                     type="text"
                     value={shpalljaKlikuar.llojiPunes || ""}
                     onChange={modifikoShpalljen}
-                    className="input-ShpalljaProfil"
+                    className="input-MenaxhoAplikimet"
                     placeholder="Full-time"
                   />
                 </div>
@@ -582,7 +582,7 @@ function MenaxhoShpalljet() {
                     value={shpalljaKlikuar.pershkrimiPunes || ""}
                     onChange={modifikoShpalljen}
                     rows="5"
-                    className="input-ShpalljaProfil"
+                    className="input-MenaxhoAplikimet"
                     placeholder="Pershkrimi"
                   />
                 </div>
@@ -813,4 +813,4 @@ function MenaxhoShpalljet() {
   );
 }
 
-export default MenaxhoShpalljet;
+export default MenaxhoAplikimet;

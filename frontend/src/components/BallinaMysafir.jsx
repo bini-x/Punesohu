@@ -1,11 +1,16 @@
+import { useState } from "react";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 
 function BallinaMysafir() {
+
   const navigate = useNavigate();
   return (
     <div>
       <Header />
+      <button type="button" className="publikoPune">
+        DARK MODE
+      </button>
       <div className="flex justify-evenly">
         <div className="border">
           <h1>Punedhenes</h1>

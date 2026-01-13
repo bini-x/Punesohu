@@ -4,7 +4,6 @@ import "../index.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
-import ShpalljaProfil from "./ShpalljaProfil";
 
 function Profili() {
   const navigate = useNavigate();
