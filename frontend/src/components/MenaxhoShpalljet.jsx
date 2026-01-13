@@ -12,6 +12,7 @@ import {
   MapPin,
   Calendar,
   Building,
+  Phone,
 } from "lucide-react";
 import {
   faSearch,
@@ -765,6 +766,21 @@ function MenaxhoShpalljet() {
                 </p>
               </div>
 
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 flex items-center justify-center">
+                    <Phone size={16} />
+                  </div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Nr-Tel
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <p className="px-1.5 text-base font-medium text-gray-900">
+                    {aplikimiKlikuar.nrTelefonit}
+                  </p>
+                </div>
+              </div>
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-8 h-8 flex items-center justify-center">

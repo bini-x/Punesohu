@@ -50,6 +50,7 @@ function KonfigurimetLlogarise() {
           mbiemri: perdoruesiData.mbiemri,
           email: perdoruesiData.email,
           fjalekalimi: perdoruesiData.fjalekalimi,
+          nrTelefonit: perdoruesiData.nrTelefonit,
         };
       } else if (perdoruesiData.tipiPerdoruesit === "punedhenes") {
         dataToSend = {
@@ -57,6 +58,7 @@ function KonfigurimetLlogarise() {
           kompania: perdoruesiData.kompania,
           email: perdoruesiData.email,
           fjalekalimi: perdoruesiData.fjalekalimi,
+          nrTelefonit: perdoruesiData.nrTelefonit,
         };
       }
 

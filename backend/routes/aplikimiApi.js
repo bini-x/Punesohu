@@ -12,6 +12,7 @@ router.post("/:id/aplikimi", async (req, res) => {
       mbiemriAplikantit,
       eksperienca,
       niveliPunes,
+      nrTelefonit,
       letraMotivuese,
     } = req.body;
     console.log(req.body);
@@ -26,6 +27,7 @@ router.post("/:id/aplikimi", async (req, res) => {
       mbiemriAplikantit,
       eksperienca,
       niveliPunes,
+      nrTelefonit,
       letraMotivuese,
     });
 
