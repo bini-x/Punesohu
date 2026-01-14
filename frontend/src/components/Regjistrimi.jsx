@@ -57,12 +57,8 @@ function Regjistrimi() {
 
       if (response.data.success) {
         alert(response.data.message);
-<<<<<<< HEAD
-                if (tipiPerdoruesit === "aplikant") {
-=======
 
         if (tipiPerdoruesit === "aplikant") {
->>>>>>> upstream/master
           localStorage.setItem("emailForVerification", dataAplikant.email);
         } else if (tipiPerdoruesit === "punedhenes") {
           localStorage.setItem("emailForVerification", dataPunedhenesi.email);
