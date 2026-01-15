@@ -85,9 +85,9 @@ function KonfigurimetLlogarise() {
   return (
     <div className="flex flex-col items-center min-h-screen">
       <Header />
-      <div className="flex justify-center w-full max-w-4xl mx-auto my-15">
+      <div className="flex justify-center items-center w-full max-w-4xl mx-auto my-15">
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden w-full">
-          <div className="p-8 border-b border-gray-100">
+          <div className="p-8 flex justify-center border-b border-gray-100">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-[#0F4C75] rounded-full mb-6">
                 <svg
@@ -131,7 +131,6 @@ function KonfigurimetLlogarise() {
                 />
               </div>
 
-              {/* Mbiemri input */}
               <div className="space-y-2">
                 <label
                   htmlFor="mbiemri"
@@ -149,7 +148,6 @@ function KonfigurimetLlogarise() {
                 />
               </div>
 
-              {/* Email input */}
               <div className="space-y-2">
                 <label
                   htmlFor="email"
@@ -167,7 +165,6 @@ function KonfigurimetLlogarise() {
                 />
               </div>
 
-              {/* Password input */}
               <div className="space-y-2">
                 <label
                   htmlFor="fjalekalimi"
@@ -205,7 +202,6 @@ function KonfigurimetLlogarise() {
                 </div>
               </div>
 
-              {/* Submit button */}
               <div className="pt-4">
                 <button
                   type="submit"
