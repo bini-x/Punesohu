@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"; // ✅ Kjo tashmë ekziston
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Ballina from "./components/Ballina";
 import ListaPuneve from "./components/ListaPuneve";
 import "./index.css";
@@ -11,7 +11,7 @@ import Shpallja from "./components/Shpallja";
 import Profili from "./components/Profili";
 import VerifikoEmail from "./components/VerifikoEmail";
 import Aplikimi from "./components/Aplikimi";
-import Footeri from "./components/Footeri"; // ✅ Importi i Footer-it
+import Footeri from "./components/Footeri"; 
 import MenaxhoShpalljet from "./components/MenaxhoShpalljet";
 import KonfigurimetLlogarise from "./components/KonfigurimetLlogarise";
 import BallinaMysafir from "./components/BallinaMysafir";
@@ -77,7 +77,7 @@ function App() {
             <Route path="/verifiko" element={<VerifikoEmail />} />
             <Route path=":id/aplikimi" element={<Aplikimi />} />
 
-            {/* ✅ SHTESË – route për llogaritjen e pagës */}
+            {}
             <Route path="/llogaritpagen" element={<LlogaritPagen />} />
           </Routes>
         </div>
