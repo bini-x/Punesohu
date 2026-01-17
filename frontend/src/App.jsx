@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom"; // ✅ Kjo tashmë ekziston
 import Ballina from "./components/Ballina";
 import ListaPuneve from "./components/ListaPuneve";
 import "./index.css";
@@ -11,13 +11,15 @@ import Shpallja from "./components/Shpallja";
 import Profili from "./components/Profili";
 import VerifikoEmail from "./components/VerifikoEmail";
 import Aplikimi from "./components/Aplikimi";
-import Footeri from "./components/Footeri";
+import Footeri from "./components/Footeri"; // ✅ Importi i Footer-it
 import MenaxhoShpalljet from "./components/MenaxhoShpalljet";
 import KonfigurimetLlogarise from "./components/KonfigurimetLlogarise";
 import BallinaMysafir from "./components/BallinaMysafir";
 import Perdoruesi from "./PerdoruesiContext";
+import LlogaritPagen from "./components/LlogaritPagen";
 import MenaxhoAplikimet from "./components/MenaxhoAplikimet";
 import { useEffect, useState } from "react";
+
 
 function App() {
   const { perdoruesiData } = Perdoruesi.usePerdoruesi();
@@ -68,17 +70,19 @@ function App() {
               path="/profili/:id/menaxhoAplikimet"
               element={<MenaxhoAplikimet />}
             />
-
             <Route
               path="/profili/:id/konfigurimet"
               element={<KonfigurimetLlogarise />}
             />
             <Route path="/verifiko" element={<VerifikoEmail />} />
             <Route path=":id/aplikimi" element={<Aplikimi />} />
+
+            {/* ✅ SHTESË – route për llogaritjen e pagës */}
+            <Route path="/llogaritpagen" element={<LlogaritPagen />} />
           </Routes>
         </div>
+        <Footeri />
       </BrowserRouter>
-      <Footeri />
     </div>
   );
 }
