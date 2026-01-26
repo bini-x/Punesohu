@@ -16,16 +16,10 @@ function Footer() {
             Për kandidatët
           </h4>
           <ul className="space-y-2 text-sm">
-            <li className="footerLinks">Kërko punë</li>
-            <li className="footerLinks">Regjistrohu</li>
-            <li className="footerLinks">Ngarko CV</li>
-            <li className="footerLinks">Apliko për punë</li>
-            <li className="hover:text-white cursor-pointer">Kërko punë</li>
-            <li className="hover:text-white cursor-pointer">Regjistrohu</li>
+            <li className="hover:text-white cursor-pointer"><Link to="LlistaPuneve">Kërko Punë</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="Regjistrimi">Regjistrohu</Link></li>
             <li className="hover:text-white cursor-pointer"><Link to="/llogaritpagen" >Llogarit pagën</Link></li>
-            <li className="hover:text-white cursor-pointer">
-              Apliko për punë
-            </li>
+            <li className="hover:text-white cursor-pointer"><Link to="RrethNesh">Rreth Nesh</Link></li>
           </ul>
         </div>
 
@@ -34,10 +28,10 @@ function Footer() {
             Për kompanitë
           </h4>
           <ul className="space-y-2 text-sm">
-            <li className="footerLinks">Shpall konkurs</li>
-            <li className="footerLinks">Regjistro kompani</li>
-            <li className="footerLinks">Planet e çmimeve</li>
-            <li className="footerLinks">Zgjidhje rekrutimi</li>
+            <li className="hover:text-white cursor-pointer"><Link to="PublikoPune">Shpall Konkurs</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="Regjistrimi">Regjistro Kompani</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="ListaKompanive">Lista e Kompanive</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="RrethNesh">Rreth Nesh</Link></li>
           </ul>
         </div>
 
