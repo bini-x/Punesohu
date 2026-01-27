@@ -12,7 +12,7 @@ import Shpallja from "./components/Shpallja";
 import Profili from "./components/Profili";
 import VerifikoEmail from "./components/VerifikoEmail";
 import Aplikimi from "./components/Aplikimi";
-import Footeri from "./components/Footeri"; 
+import Footeri from "./components/Footeri";
 import MenaxhoShpalljet from "./components/MenaxhoShpalljet";
 import KonfigurimetLlogarise from "./components/KonfigurimetLlogarise";
 import BallinaMysafir from "./components/BallinaMysafir";
@@ -61,7 +61,8 @@ function App() {
             <Route path="/rrethNesh" element={<RrethNesh />} />
             <Route path="/kycja" element={<Kycja />} />
             <Route path="/regjistrimi" element={<Regjistrimi />} />
-            <Route path="/publikoPune" element={<PublikoPune />} />
+            <Route path="/publikopune" element={<PublikoPune />} />
+            <Route path="/kycja" element={<Kycja />} />
             <Route path="/shpallja/:id" element={<Shpallja />} />
             <Route path="/profili/:id" element={<Profili />} />
             <Route
@@ -93,3 +94,4 @@ function App() {
 }
 
 export default App;
+
