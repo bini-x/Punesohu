@@ -1,3 +1,4 @@
+import Header from "./Header";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -201,6 +202,8 @@ function MenaxhoShpalljet() {
   };
 
   return (
+    <div className="flex flex-col items-center min-h-screen">
+      <Header />
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
@@ -848,8 +851,11 @@ function MenaxhoShpalljet() {
             </div>
           </div>
         </div>
+        
       )}
     </div>
+  </div>
+
   );
 }
 
