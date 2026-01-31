@@ -33,7 +33,6 @@ const ProfiliAplikantit = () => {
         setLoading(true);
         const response = await axios.get(
           `http://localhost:3000/api/aplikantet/${id}`,
-          { withCredentials: true },
         );
         if (response.data.success) {
           setAplikanti(response.data.data);
@@ -432,4 +431,3 @@ const ProfiliAplikantit = () => {
 };
 
 export default ProfiliAplikantit;
-
