@@ -63,7 +63,6 @@ function Profili() {
       const response = await axios.post(
         "http://localhost:3000/api/ckycja/perdoruesi",
         {},
-        { withCredentials: true },
       );
       setPerdoruesiData(null);
       console.log("Ckycja u be", response.data);

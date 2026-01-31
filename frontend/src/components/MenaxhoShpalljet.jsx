@@ -186,6 +186,20 @@ function MenaxhoShpalljet() {
     }
   };
 
+  const ruajNdryshimetAplikimit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(
+        `http://localhost:3000/api/shpallja/aplikimi/${aplikimiKlikuar._id}`,
+        aplikimiKlikuar,
+      );
+      alert("Ndryshimet u ruajten");
+      setAplikimiKlikuar(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const shfaqAplikantPopup = (e, shpallja) => {
     e.stopPropagation();
     setShpalljaZgjedhurPerAplikante(shpallja);
@@ -207,6 +221,14 @@ function MenaxhoShpalljet() {
   const mbyllAplikimin = () => {
     setAplikimiKlikuar(null);
   };
+
+  // const modifikoAplikimin = (e) => {
+  //   const { id, value } = e.target;
+  //   setAplikimiKlikuar({
+  //     ...aplikimiKlikuar,
+  //     [id]: value,
+  //   });
+  // };
 
   const sortimDates = (data) => {
     const sorted = [...data].sort((a, b) => {
@@ -877,6 +899,21 @@ function MenaxhoShpalljet() {
                   </button>
                 </div>
               </div>
+              <select
+                id="status"
+                onChange={(e) =>
+                  setAplikimiKlikuar({
+                    ...aplikimiKlikuar,
+                    status: e.target.value,
+                  })
+                }
+              >
+                <option value={`${aplikimiKlikuar.status}`} default hidden>
+                  {aplikimiKlikuar.status}
+                </option>
+                <option value="Pranuar">Prano</option>
+                <option value="Refuzuar">Refuzo</option>
+              </select>
             </div>
 
             <div className="px-6 py-4 bg-white/80 backdrop-blur-lg border-t border-gray-100 rounded-b-2xl flex justify-end items-center gap-3">
@@ -885,6 +922,12 @@ function MenaxhoShpalljet() {
                 className="px-5 py-2.5 text-sm text-white font-semibold hover:text-black bg-primary hover:bg-white hover:border rounded-xl transition-all duration-200"
               >
                 Mbyll
+              </button>
+              <button
+                onClick={ruajNdryshimetAplikimit}
+                className="px-5 py-2.5 text-sm text-white font-semibold hover:text-black bg-primary hover:bg-white hover:border rounded-xl transition-all duration-200"
+              >
+                Ruaj Ndryshimet
               </button>
             </div>
           </div>

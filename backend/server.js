@@ -10,6 +10,7 @@ const profiliApi = require("./routes/profiliApi");
 const aplikimiApi = require("./routes/aplikimiApi");
 const kompaniteApi = require("./routes/kompaniteApi");
 const punetRuajturaApi = require("./routes/punetRuajturaApi");
+const aplikantetApi = require("./routes/aplikantetApi");
 const session = require("express-session");
 require("dotenv").config();
 
@@ -34,7 +35,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      path: "/",
+      maxAge: 24 * 60 * 60 * 1000,
     },
   }),
 );
@@ -47,6 +48,7 @@ app.use("/api/kycja", kycjaApi);
 app.use("/api/ckycja", ckycjaApi);
 app.use("/api/profili", profiliApi);
 app.use("/api/kompania", kompaniteApi);
+app.use("/api/aplikantet", aplikantetApi);
 app.use("/api/punetRuajtura", punetRuajturaApi);
 mongoose
   .connect(process.env.MONGO_URI)

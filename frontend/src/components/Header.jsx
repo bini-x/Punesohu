@@ -67,7 +67,6 @@ function Header() {
       const response = await axios.post(
         "http://localhost:3000/api/ckycja/perdoruesi",
         {},
-        { withCredentials: true },
       );
 
       setPerdoruesiData(null);
@@ -104,7 +103,7 @@ function Header() {
             Lista e Kompanive
           </Link>
           {isPunedhenes && (
-            <Link to="/PublikoPune" className="nav-link">
+            <Link to="/publikopune" className="nav-link">
               Publiko Pune
             </Link>
           )}
@@ -221,7 +220,7 @@ function Header() {
               <Link to="/kycja" className="kycja">
                 Kycu/Regjistrohu
               </Link>
-              <Link to="/PublikoPune" className="publikoPune">
+              <Link to="/kycja" className="publikoPune">
                 Publiko Pune
               </Link>
             </>
@@ -271,7 +270,7 @@ function Header() {
 
             {isPunedhenes && (
               <Link
-                to="/PublikoPune"
+                to="/publikopune"
                 className="text-lg font-medium py-3 hover:text-[#0F4C75] transition-colors"
                 onClick={closeMenu}
               >
@@ -388,7 +387,7 @@ function Header() {
                   Kycu/Regjistrohu
                 </Link>
                 <Link
-                  to="/PublikoPune"
+                  to="/kycja"
                   className="publikoPune text-center"
                   onClick={closeMenu}
                 >

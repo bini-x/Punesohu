@@ -16,10 +16,18 @@ function Footer() {
             Për kandidatët
           </h4>
           <ul className="space-y-2 text-sm">
-            <li className="hover:text-white cursor-pointer"><Link to="LlistaPuneve">Kërko Punë</Link></li>
-            <li className="hover:text-white cursor-pointer"><Link to="Regjistrimi">Regjistrohu</Link></li>
-            <li className="hover:text-white cursor-pointer"><Link to="/llogaritpagen" >Llogarit pagën</Link></li>
-            <li className="hover:text-white cursor-pointer"><Link to="RrethNesh">Rreth Nesh</Link></li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="/listapuneve">Kërko Punë</Link>
+            </li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="/regjistrimi">Regjistrohu</Link>
+            </li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="/llogaritpagen">Llogarit pagën</Link>
+            </li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="/rrethnesh">Rreth Nesh</Link>
+            </li>
           </ul>
         </div>
 
@@ -28,10 +36,18 @@ function Footer() {
             Për kompanitë
           </h4>
           <ul className="space-y-2 text-sm">
-            <li className="hover:text-white cursor-pointer"><Link to="PublikoPune">Shpall Konkurs</Link></li>
-            <li className="hover:text-white cursor-pointer"><Link to="Regjistrimi">Regjistro Kompani</Link></li>
-            <li className="hover:text-white cursor-pointer"><Link to="ListaKompanive">Lista e Kompanive</Link></li>
-            <li className="hover:text-white cursor-pointer"><Link to="RrethNesh">Rreth Nesh</Link></li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="PublikoPune">Shpall Konkurs</Link>
+            </li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="Regjistrimi">Regjistro Kompani</Link>
+            </li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="ListaKompanive">Lista e Kompanive</Link>
+            </li>
+            <li className="hover:text-white cursor-pointer">
+              <Link to="RrethNesh">Rreth Nesh</Link>
+            </li>
           </ul>
         </div>
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import axios from "axios";
 import KompaniaCard from "./KompaniaCard";
+
 function ListaKompanive() {
   const [kompanite, setKompanite] = useState([]);
 

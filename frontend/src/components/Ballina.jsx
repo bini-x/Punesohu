@@ -5,8 +5,8 @@ import ShpalljaCard from "./ShpalljaCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-import PublikoPune from "./PublikoPune";
 import Perdoruesi from "../PerdoruesiContext";
+import BallinaPundhenesit from "./BallinaPundhenesit";
 
 function Ballina() {
   const { perdoruesiData } = Perdoruesi.usePerdoruesi();
@@ -50,7 +50,7 @@ function Ballina() {
     <div>
       {perdoruesiData?.tipiPerdoruesit === "punedhenes" ? (
         <>
-          <PublikoPune />
+          <BallinaPundhenesit />
         </>
       ) : (
         <>
@@ -80,6 +80,5 @@ function Ballina() {
     </div>
   );
 }
-
 
 export default Ballina;
