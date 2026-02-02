@@ -18,14 +18,36 @@ import {
 import Header from "./Header";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Perdoruesi from "../PerdoruesiContext";
 
-const ProfiliAplikantit = () => {
+const ProfiliAplikantitVizitor = () => {
   const { id } = useParams();
   const [aplikanti, setAplikanti] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
   const [tempData, setTempData] = useState({});
+
+  const [fotoProfile, setFotoProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/profili/${id}`,
+        );
+        // Ngarko foton e profile nese ekziston
+        if (response.data.data.foto) {
+          setFotoProfile(`http://localhost:3000/api/profili/${id}/foto`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
 
   useEffect(() => {
     const fetchAplikanti = async () => {
@@ -116,9 +138,7 @@ const ProfiliAplikantit = () => {
                 <div className="flex items-center gap-6 mb-4 md:mb-0">
                   <div className="relative">
                     <img
-                      src={
-                        editing ? tempData.fotoProfili : aplikanti.fotoProfili
-                      }
+                      src={editing ? tempData.fotoProfili : fotoProfile}
                       alt="Foto Profili"
                       className="w-24 h-24 rounded-full border-4 border-white"
                     />
@@ -430,4 +450,4 @@ const ProfiliAplikantit = () => {
   );
 };
 
-export default ProfiliAplikantit;
+export default ProfiliAplikantitVizitor;

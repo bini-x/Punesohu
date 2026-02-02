@@ -21,7 +21,7 @@ import PunetRuajtura from "./components/PunetRuajtura";
 import { useEffect, useState } from "react";
 import ProfiliKompaniseVizitor from "./components/ProfiliKompaniseVizitor";
 import LlogaritPagen from "./components/LlogaritPagen";
-import ProfiliAplikantit from "./components/ProfiliAplikantit";
+import ProfiliAplikantitVizitor from "./components/ProfiliAplikantitVizitor";
 import ProfiliKompanise from "./components/ProfiliKompanise";
 
 function App() {
@@ -65,10 +65,7 @@ function App() {
             <Route path="/kycja" element={<Kycja />} />
             <Route path="/shpallja/:id" element={<Shpallja />} />
             <Route path="/profili/:id" element={<Profili />} />
-            <Route path="/profiliaplikanteve" element={<ProfiliAplikantit />} />
             <Route path="/publikoPune" element={<PublikoPune />} />
-            <Route path="/shpallja/:id" element={<Shpallja />} />
-            <Route path="/profili/:id" element={<Profili />} />
             <Route path="/profilikompanise" element={<ProfiliKompanise />} />
 
             <Route
@@ -90,7 +87,10 @@ function App() {
               element={<PunetRuajtura />}
             />
             <Route path="/kompania/:id" element={<ProfiliKompaniseVizitor />} />
-            <Route path="/aplikanti/:id" element={<ProfiliAplikantit />} />
+            <Route
+              path="/profiliAplikantit/:id"
+              element={<ProfiliAplikantitVizitor />}
+            />
             <Route path="/llogaritpagen" element={<LlogaritPagen />} />
             <Route path="/kompani/:id" element={<ProfiliKompanise />} />
           </Routes>
