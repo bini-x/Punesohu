@@ -857,7 +857,6 @@ function MenaxhoShpalljet() {
                   </p>
                 </div>
               </div>
-
               <div className="detajetAplikantit">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-8 h-8 flex items-center justify-center">
@@ -869,7 +868,6 @@ function MenaxhoShpalljet() {
                   {aplikimiKlikuar.emailAplikantit}
                 </p>
               </div>
-
               <div className="detajetAplikantit">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-8 h-8 flex items-center justify-center">
@@ -896,7 +894,6 @@ function MenaxhoShpalljet() {
                   </p>
                 </div>
               </div>
-
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-8 h-8 flex items-center justify-center">
@@ -910,7 +907,6 @@ function MenaxhoShpalljet() {
                   </p>
                 </div>
               </div>
-
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
                 <div className="flex justify-between items-center bg-linear-to-br from-gray-50 to-gray-100/50 rounded-lg p-4 max-h-48 overflow-y-auto border border-gray-200">
                   <p className="px-1.5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
@@ -931,25 +927,23 @@ function MenaxhoShpalljet() {
                 </div>
               </div>
               {aplikimiKlikuar.status === "Ne_Pritje" &&
-              shpalljaSkaduar(shpalljaZgjedhurPerAplikante.dataKrijimit) ? (
-                <select
-                  id="status"
-                  onChange={(e) =>
-                    setAplikimiKlikuar({
-                      ...aplikimiKlikuar,
-                      status: e.target.value,
-                    })
-                  }
-                >
-                  <option value={`${aplikimiKlikuar.status}`} default hidden>
-                    {aplikimiKlikuar.status}
-                  </option>
-                  <option value="Pranuar">Prano</option>
-                  <option value="Refuzuar">Refuzo</option>
-                </select>
-              ) : (
-                <p>{aplikimiKlikuar.status}</p>
-              )}
+                shpalljaSkaduar(shpalljaZgjedhurPerAplikante.dataKrijimit)(
+                  <select
+                    id="status"
+                    onChange={(e) =>
+                      setAplikimiKlikuar({
+                        ...aplikimiKlikuar,
+                        status: e.target.value,
+                      })
+                    }
+                  >
+                    <option value={`${aplikimiKlikuar.status}`} default hidden>
+                      {aplikimiKlikuar.status}
+                    </option>
+                    <option value="Pranuar">Prano</option>
+                    <option value="Refuzuar">Refuzo</option>
+                  </select>,
+                )}
             </div>
 
             <div className="px-6 py-4 bg-white/80 backdrop-blur-lg border-t border-gray-100 rounded-b-2xl flex justify-end items-center gap-3">
@@ -977,4 +971,3 @@ function MenaxhoShpalljet() {
 }
 
 export default MenaxhoShpalljet;
-

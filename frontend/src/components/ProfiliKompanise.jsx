@@ -16,36 +16,18 @@ import {
   Building2,
   Briefcase,
 } from "lucide-react";
+import Perdoruesi from "../PerdoruesiContext";
 
 function ProfiliKompanise() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [kompaniaData, setKompaniaData] = useState({});
-  const [linkeSociale, setLinkeSociale] = useState([]);
+  const { perdoruesiData, setPerdoruesiData } = Perdoruesi.usePerdoruesi();
   const [shfaqLinkeForm, setShfaqLinkeForm] = useState(false);
   const [puneHapura, setPuneHapura] = useState([]);
   const [shfaqFormenPuneHapura, setShfaqFormenPuneHapura] = useState(false);
-
-  // Photo upload states
   const [fotoProfile, setFotoProfile] = useState(null);
   const [poNgarkohetFoto, setPoNgarkohetFoto] = useState(false);
   const inputFotoRef = useRef(null);
-
-  // Edit mode states
-  const [editMode, setEditMode] = useState({
-    rrethKompanise: false,
-    permbledhje: false,
-  });
-
-  // Editable data
-  const [rrethKompanise, setRrethKompanise] = useState("");
-  const [permbledhje, setPermbledhje] = useState({
-    kategorite: "",
-    numriTelefonit: "",
-    dataThemelimit: "",
-    emailAdresa: "",
-    vendodhja: "",
-  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,15 +35,9 @@ function ProfiliKompanise() {
         const response = await axios.get(
           `http://localhost:3000/api/profili/${id}`,
         );
-        setKompaniaData(response.data.data);
-        setRrethKompanise(response.data.data.rrethKompanise || "");
-        setPermbledhje({
-          kategorite: response.data.data.kategorite || "",
-          numriTelefonit: response.data.data.numriTelefonit || "",
-          dataThemelimit: response.data.data.dataThemelimit || "",
-          emailAdresa: response.data.data.emailAdresa || "",
-          vendodhja: response.data.data.vendodhja || "",
-        });
+        if (response.data.success) {
+          setPerdoruesiData(response.data.data);
+        }
 
         // Ngarko foton e profile nese ekziston
         if (response.data.data.foto) {
@@ -77,8 +53,8 @@ function ProfiliKompanise() {
   }, [id]);
 
   const merreShkronjatFillestare = () => {
-    if (kompaniaData?.emri) {
-      return kompaniaData.emri.substring(0, 2).toUpperCase();
+    if (perdoruesiData?.kompania) {
+      return perdoruesiData.kompania.substring(0, 2).toUpperCase();
     }
     return "KO";
   };
@@ -155,64 +131,105 @@ function ProfiliKompanise() {
     }
   };
 
-  // Linki i ri
+  const [editMode, setEditMode] = useState({
+    rrethKompanise: false,
+    permbledhje: false,
+  });
+
+  // Editable data
+  const [rrethKompanise, setRrethKompanise] = useState("");
+  const [permbledhje, setPermbledhje] = useState({
+    kategorite: "",
+    numriTelefonit: "",
+    dataThemelimit: "",
+    emailAdresa: "",
+    vendodhja: "",
+  });
+
   const [linkRi, setLinkRi] = useState({
     platforma: "",
-    url: "",
+    linku: "",
   });
 
-  const handleShtoLink = () => {
-    if (linkRi.platforma && linkRi.url) {
-      setLinkeSociale([...linkeSociale, { ...linkRi, id: Date.now() }]);
-      setLinkRi({
-        platforma: "",
-        url: "",
-      });
-      setShfaqLinkeForm(false);
+  const handleShtoLink = async () => {
+    if (!linkRi.platforma || !linkRi.linku) {
+      alert("Ju lutem plotësoni të dyja fushat");
+      return;
+    }
+
+    try {
+      const newLink = {
+        platforma: linkRi.platforma,
+        linku: linkRi.linku,
+      };
+
+      const updatedLinks = [...(perdoruesiData?.linqet || []), newLink];
+
+      const response = await axios.put(
+        `http://localhost:3000/api/profili/${id}`,
+        {
+          linqet: updatedLinks,
+        },
+      );
+
+      if (response.data.success) {
+        setPerdoruesiData(response.data.data);
+        setLinkRi({
+          platforma: "",
+          linku: "",
+        });
+        setShfaqLinkeForm(false);
+        alert("Linku u shtua me sukses!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Gabim në ruajtjen e linkut");
     }
   };
 
-  const handleFshijLinkin = (id) => {
-    setLinkeSociale(linkeSociale.filter((link) => link.id !== id));
-  };
+  const handleFshijLinkin = async (index) => {
+    if (!window.confirm("Jeni të sigurt që dëshironi ta fshini këtë link?")) {
+      return;
+    }
 
-  // Puna e re e hapur
-  const [puneRe, setPuneRe] = useState({
-    titulli: "",
-    lloji: "",
-    lokacioni: "",
-    pershkrimi: "",
-    kualifikimet: "",
-    dataPublikimit: "",
-  });
+    try {
+      const updatedLinks = (perdoruesiData?.linqet || []).filter(
+        (_, i) => i !== index,
+      );
 
-  const handleShtoPune = () => {
-    if (puneRe.titulli && puneRe.lloji) {
-      setPuneHapura([...puneHapura, { ...puneRe, id: Date.now() }]);
-      setPuneRe({
-        titulli: "",
-        lloji: "",
-        lokacioni: "",
-        pershkrimi: "",
-        kualifikimet: "",
-        dataPublikimit: "",
-      });
-      setShfaqFormenPuneHapura(false);
+      const response = await axios.put(
+        `http://localhost:3000/api/profili/${id}`,
+        {
+          linqet: updatedLinks,
+        },
+      );
+
+      if (response.data.success) {
+        setPerdoruesiData(response.data.data);
+        alert("Linku u fshi me sukses!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Gabim në fshirjen e linkut");
     }
   };
-
-  const handleFshijPune = (id) => {
-    setPuneHapura(puneHapura.filter((pune) => pune.id !== id));
-  };
-
-  // Save edits
   const handleRuajRrethKompanise = async () => {
     try {
-      await axios.put(`http://localhost:3000/api/profili/${id}`, {
-        rrethKompanise,
-      });
-      setEditMode({ ...editMode, rrethKompanise: false });
-      alert("Përditësuar me sukses!");
+      const response = await axios.put(
+        `http://localhost:3000/api/profili/${id}`,
+        {
+          rrethKompanise,
+        },
+      );
+      if (response.data.success) {
+        setPerdoruesiData((prev) => ({
+          ...prev,
+          ...response.data.data, // may contain { rrethKompanise }
+          rrethKompanise, // or just set it directly
+        }));
+        setEditMode({ ...editMode, rrethKompanise: false });
+        alert("Përditësuar me sukses!");
+      }
     } catch (error) {
       console.error(error);
       alert("Gabim në përditësim");
@@ -221,9 +238,21 @@ function ProfiliKompanise() {
 
   const handleRuajPermbledhje = async () => {
     try {
-      await axios.put(`http://localhost:3000/api/profili/${id}`, {
-        ...permbledhje,
-      });
+      const response = await axios.put(
+        `http://localhost:3000/api/profili/${id}`,
+        {
+          ...permbledhje,
+        },
+      );
+      if (response.data.success) {
+        setPerdoruesiData((prev) => ({
+          ...prev,
+          ...response.data.data,
+          ...permbledhje, // explicitly set the fields you just saved
+        }));
+        setEditMode({ ...editMode, permbledhje: false });
+        alert("Përditësuar me sukses!");
+      }
       setEditMode({ ...editMode, permbledhje: false });
       alert("Përditësuar me sukses!");
     } catch (error) {
@@ -264,7 +293,7 @@ function ProfiliKompanise() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <Building2 size={48} />
+                    merreShkronjatFillestare()
                   )}
                 </div>
 
@@ -304,23 +333,23 @@ function ProfiliKompanise() {
 
               <div className="mt-4 sm:mt-0 sm:ml-6 text-center sm:text-left flex-1">
                 <h1 className="text-left text-3xl font-bold mb-1 text-gray-900">
-                  {kompaniaData?.kompania || "Emri i Kompanisë"}
+                  {perdoruesiData?.kompania || "Emri i Kompanisë"}
                 </h1>
                 <div className="space-y-2 mt-4">
                   <p className="paragrafProfili">
                     <Mail size={16} />
-                    {kompaniaData.email || "email@kompania.com"}
+                    {perdoruesiData?.email || "email@kompania.com"}
                   </p>
 
                   <div className="mt-4">
                     <p className="text-sm text-gray-600 mb-2">
-                      Linjet e rrjeteve sociale:
+                      Linqet e rrjeteve sociale:
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {linkeSociale.map((link) => (
-                        <div key={link.id} className="group relative">
+                      {perdoruesiData?.linqet?.map((link, index) => (
+                        <div key={index} className="group relative">
                           <a
-                            href={link.url}
+                            href={link.linku}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm hover:bg-blue-100 transition-colors"
@@ -329,7 +358,7 @@ function ProfiliKompanise() {
                             {link.platforma}
                           </a>
                           <button
-                            onClick={() => handleFshijLinkin(link.id)}
+                            onClick={() => handleFshijLinkin(index)}
                             className="absolute -top-1 -right-1 p-0.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             <X size={12} />
@@ -350,7 +379,7 @@ function ProfiliKompanise() {
                         <div className="space-y-2">
                           <input
                             type="text"
-                            placeholder="Platforma (p.sh. LinkedIn, Facebook)"
+                            placeholder="Platforma (p.sh. LinkedIn, GitHub)"
                             value={linkRi.platforma}
                             onChange={(e) =>
                               setLinkRi({
@@ -363,9 +392,9 @@ function ProfiliKompanise() {
                           <input
                             type="url"
                             placeholder="URL"
-                            value={linkRi.url}
+                            value={linkRi.linku}
                             onChange={(e) =>
-                              setLinkRi({ ...linkRi, url: e.target.value })
+                              setLinkRi({ ...linkRi, linku: e.target.value })
                             }
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           />
@@ -410,66 +439,7 @@ function ProfiliKompanise() {
 
             {shfaqFormenPuneHapura && (
               <div className="px-6 py-4 bg-gray-50 mb-5 rounded-lg">
-                <div className="space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Titulli i pozicionit"
-                    value={puneRe.titulli}
-                    onChange={(e) =>
-                      setPuneRe({ ...puneRe, titulli: e.target.value })
-                    }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  <div className="grid grid-cols-2 gap-3">
-                    <input
-                      type="text"
-                      placeholder="Lloji (p.sh. Full-time, Part-time)"
-                      value={puneRe.lloji}
-                      onChange={(e) =>
-                        setPuneRe({ ...puneRe, lloji: e.target.value })
-                      }
-                      className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Lokacioni"
-                      value={puneRe.lokacioni}
-                      onChange={(e) =>
-                        setPuneRe({ ...puneRe, lokacioni: e.target.value })
-                      }
-                      className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                  <textarea
-                    placeholder="Përshkrimi i punës"
-                    value={puneRe.pershkrimi}
-                    onChange={(e) =>
-                      setPuneRe({ ...puneRe, pershkrimi: e.target.value })
-                    }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    rows="3"
-                  />
-                  <textarea
-                    placeholder="Kualifikimet e nevojshme"
-                    value={puneRe.kualifikimet}
-                    onChange={(e) =>
-                      setPuneRe({ ...puneRe, kualifikimet: e.target.value })
-                    }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    rows="2"
-                  />
-                  <div className="flex gap-2">
-                    <button onClick={handleShtoPune} className="publikoPune">
-                      Publiko
-                    </button>
-                    <button
-                      onClick={() => setShfaqFormenPuneHapura(false)}
-                      className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-                    >
-                      Anulo
-                    </button>
-                  </div>
-                </div>
+                <div className="space-y-3"></div>
               </div>
             )}
 
@@ -485,12 +455,6 @@ function ProfiliKompanise() {
                       key={pune.id}
                       className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow relative group"
                     >
-                      <button
-                        onClick={() => handleFshijPune(pune.id)}
-                        className="absolute top-4 right-4 p-1 text-red-500 hover:bg-red-50 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        <X size={18} />
-                      </button>
                       <h3 className="font-semibold text-lg text-gray-900 mb-2">
                         {pune.titulli}
                       </h3>
@@ -571,7 +535,8 @@ function ProfiliKompanise() {
               />
             ) : (
               <p className="text-gray-600 leading-relaxed">
-                {rrethKompanise || "Nuk ka informacione të shtuar akoma."}
+                {perdoruesiData?.rrethKompanise ||
+                  "Nuk ka informacione të shtuar akoma."}
               </p>
             )}
           </div>
@@ -706,11 +671,11 @@ function ProfiliKompanise() {
                   {editMode.permbledhje ? (
                     <input
                       type="tel"
-                      value={permbledhje.numriTelefonit}
+                      value={perdoruesiData.nrTelefonit}
                       onChange={(e) =>
                         setPermbledhje({
                           ...permbledhje,
-                          numriTelefonit: e.target.value,
+                          nrTelefonit: e.target.value,
                         })
                       }
                       placeholder="+383 XX XXX XXX"
@@ -718,7 +683,7 @@ function ProfiliKompanise() {
                     />
                   ) : (
                     <p className="text-gray-600 pl-4">
-                      {permbledhje.numriTelefonit || "Nuk është specifikuar"}
+                      {perdoruesiData?.nrTelefonit || "Nuk është specifikuar"}
                     </p>
                   )}
                 </div>

@@ -47,6 +47,9 @@ const perdoruesSchema = new mongoose.Schema(
         ref: "Shpallja",
       },
     ],
+    aftesite: {
+      type: [String],
+    },
     foto: {
       emriFoto: {
         type: String,
@@ -103,6 +106,9 @@ const perdoruesSchema = new mongoose.Schema(
         linku: String,
       },
     ],
+    rrethKompanise: {
+      type: String,
+    },
   },
   {
     timestamps: true,
