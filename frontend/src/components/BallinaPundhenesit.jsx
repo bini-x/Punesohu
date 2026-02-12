@@ -33,7 +33,7 @@ function BallinaPundhenesit() {
       <Header />
       
       {/* Hero Section profesional */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[769FCD] to-[#B9D7EA] text-white">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[769FCD] to-[#B9D7EA]">
         {/* Forme dekorative subtile */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl"></div>
@@ -41,13 +41,13 @@ function BallinaPundhenesit() {
         <div className="relative z-10 py-20 px-6 md:px-12 max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="flex-1 max-w-2xl">
-              <div className="inline-block bg-blue-600 rounded-lg px-4 py-2 mb-6">
+              <div className="inline-block bg-blue-400 rounded-lg px-4 py-2 mb-6">
                 <span className="text-sm font-semibold">Paneli i Menaxhimit</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl mb-6 leading-tight">
                 Menaxho kandidatët dhe gjej profesionistët e duhur
               </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl  mb-8 leading-relaxed">
                 Platforma profesionale për të eksploruar, vlerësuar dhe kontaktuar kandidatët më të mirë për ekipin tuaj.
               </p>
               
@@ -55,15 +55,15 @@ function BallinaPundhenesit() {
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/10">
                   <div className="text-3xl font-bold text-blue-400">{aplikantet.length}</div>
-                  <div className="text-sm text-gray-400 mt-1">Kandidatë aktivë</div>
+                  <div className="text-sm mt-1">Kandidatë aktivë</div>
                 </div>
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/10">
                   <div className="text-3xl font-bold text-blue-400">100%</div>
-                  <div className="text-sm text-gray-400 mt-1">Të verifikuar</div>
+                  <div className="text-sm mt-1">Të verifikuar</div>
                 </div>
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/10">
                   <div className="text-3xl font-bold text-blue-400">Fast</div>
-                  <div className="text-sm text-gray-400 mt-1">Përgjigje</div>
+                  <div className="text-sm mt-1">Përgjigje</div>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@ function BallinaPundhenesit() {
                       </div>
                       <div>
                         <div className="font-semibold">Profile të plota</div>
-                        <div className="text-sm text-gray-400">CV dhe dokumentacione</div>
+                        <div className="text-sm text-gray-600">CV dhe dokumentacione</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 bg-white/5 rounded-xl p-4 border border-white/10">
@@ -92,7 +92,7 @@ function BallinaPundhenesit() {
                       </div>
                       <div>
                         <div className="font-semibold">Kërkim i avancuar</div>
-                        <div className="text-sm text-gray-400">Filtro sipas kritereve</div>
+                        <div className="text-sm text-gray-600">Filtro sipas kritereve</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 bg-white/5 rounded-xl p-4 border border-white/10">
@@ -103,7 +103,7 @@ function BallinaPundhenesit() {
                       </div>
                       <div>
                         <div className="font-semibold">Komunikim direkt</div>
-                        <div className="text-sm text-gray-400">Kontakto kandidatët</div>
+                        <div className="text-sm text-gray-600">Kontakto kandidatët</div>
                       </div>
                     </div>
                   </div>
