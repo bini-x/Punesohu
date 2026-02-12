@@ -290,8 +290,6 @@ function MenaxhoShpalljet() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
-      <Header />
     <div className="bg-white min-h-screen">
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -965,7 +963,6 @@ function MenaxhoShpalljet() {
         
       )}
     </div>
-  </div>
 
   );
 }
