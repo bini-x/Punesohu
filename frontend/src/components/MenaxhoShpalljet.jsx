@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -254,10 +254,10 @@ function MenaxhoShpalljet() {
     const tani = new Date();
 
     const diferenca = tani - dataKrijimit;
-    // const 30Dite = 30 * 24 * 60 * 60 * 1000; // 30 dite
-    const dyMinuta = 2 * 60 * 1000;
+    const tridhjeteDite = 30 * 24 * 60 * 60 * 1000;
+    // const dyMinuta = 2 * 60 * 1000;
 
-    return diferenca > dyMinuta;
+    return diferenca > tridhjeteDite;
   };
 
   const filteredData = sortimDates(
@@ -960,8 +960,10 @@ function MenaxhoShpalljet() {
             </div>
           </div>
         </div>
+        
       )}
     </div>
+
   );
 }
 
