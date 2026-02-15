@@ -357,7 +357,7 @@ function MenaxhoShpalljet() {
 
   return (
     <div className="bg-white min-h-screen">
-      <Header />
+      <Header withGradient={true} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold text-gray-900">
@@ -462,12 +462,12 @@ function MenaxhoShpalljet() {
                   <th className="tableHead text-center">Orari</th>
 
                   {filtrimiFaqes !== "Active" ? (
-                  <>
-                    <th className="tableHead">Aplikimet ne Pritje</th>
-                    <th className="tableHead">Aplikimet e Pranuara</th>
-                    <th className="tableHead">Aplikimet e Refuzuara</th>
-                  </>
-                  ): (
+                    <>
+                      <th className="tableHead">Aplikimet ne Pritje</th>
+                      <th className="tableHead">Aplikimet e Pranuara</th>
+                      <th className="tableHead">Aplikimet e Refuzuara</th>
+                    </>
+                  ) : (
                     <th className="tableHead">Aplikimet</th>
                   )}
                   <th className="tableHead text-right">Veprime</th>
@@ -509,24 +509,23 @@ function MenaxhoShpalljet() {
                     </td>
                     {filtrimiFaqes !== "Active" && (
                       <>
-                                        <td className="tableData">
-                      <button
-                        onClick={(e) => shfaqAplikantPranuar(e, sh)}
-                        className="text-sm text-indigo-600 hover:text-indigo-900 font-medium"
-                      >
-                        {sh.numriPranuar} aplikant
-                      </button>
-                    </td>
-                    <td className="tableData">
-                      <button
-                        onClick={(e) => shfaqAplikantRefuzuar(e, sh)}
-                        className="text-sm text-indigo-600 hover:text-indigo-900 font-medium"
-                      >
-                        {sh.numriRefuzuar} aplikant
-                      </button>
-                    </td>
-                    </>
-
+                        <td className="tableData">
+                          <button
+                            onClick={(e) => shfaqAplikantPranuar(e, sh)}
+                            className="text-sm text-indigo-600 hover:text-indigo-900 font-medium"
+                          >
+                            {sh.numriPranuar} aplikant
+                          </button>
+                        </td>
+                        <td className="tableData">
+                          <button
+                            onClick={(e) => shfaqAplikantRefuzuar(e, sh)}
+                            className="text-sm text-indigo-600 hover:text-indigo-900 font-medium"
+                          >
+                            {sh.numriRefuzuar} aplikant
+                          </button>
+                        </td>
+                      </>
                     )}
                     <td className="tableData text-right text-sm font-medium">
                       <div className="relative">
