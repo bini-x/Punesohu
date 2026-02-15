@@ -94,9 +94,9 @@ function ListaAplikanteve() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Gradient Hero Section - Same as ListaPuneve */}
+      {/* Gradient Hero Section */}
       <div className="bg-gradient-to-br from-[#F7FBFC] to-[#B9D7EA] pb-16 backdrop-blur-sm">
-        <Header />
+        <Header withGradient={true} />
 
         <div className="max-w-6xl mx-auto px-4 mt-20 mb-12">
           {/* Hero Section */}
@@ -160,20 +160,18 @@ function ListaAplikanteve() {
               </p>
             </div>
           </div>
+
+          {/* Search Section */}
           <div className="mt-20">
             <Kerkimi />
           </div>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {/* Search Section */}
-        <Kerkimi />
       </div>
 
       {/* Content Section */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Section Title */}
-        <div className="text-center mb-12 -mt-8">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-3">
             Gjen talentin që kërkon
           </h2>
@@ -183,66 +181,8 @@ function ListaAplikanteve() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-          {currentItems.map((a) => (
-            <AplikantiCard key={a._id} aplikanti={a} />
-          ))}
-        </div>
-
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-3 mt-16">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className={`
-                w-9 h-9 rounded-full border transition
-                ${
-                  currentPage === 1
-                    ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-white text-gray-700 border-gray-300 hover:bg-primary hover:text-white"
-                }
-              `}
-            >
-              ‹
-            </button>
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`
-                  w-9 h-9 rounded-full font-medium transition
-                  ${
-                    currentPage === page
-                      ? "bg-primary text-white shadow-md scale-110"
-                      : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
-                  }
-                `}
-              >
-                {page}
-              </button>
-            ))}
-
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className={`
-                w-9 h-9 rounded-full border transition
-                ${
-                  currentPage === totalPages
-                    ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-white text-gray-700 border-gray-300 hover:bg-primary hover:text-white"
-                }
-              `}
-            >
-              ›
-            </button>
-          </div>
-        )}
-
-        {aplikantet.length === 0 && (
+        {/* Applicants Grid */}
+        {aplikantet.length === 0 ? (
           <div className="text-center mt-20">
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 max-w-lg mx-auto shadow-lg">
               <div className="text-6xl mb-4">👥</div>
@@ -254,6 +194,72 @@ function ListaAplikanteve() {
               </p>
             </div>
           </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+              {currentItems.map((a) => (
+                <AplikantiCard key={a._id} aplikanti={a} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-3 mt-16">
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className={`
+                    w-9 h-9 rounded-full border transition
+                    ${
+                      currentPage === 1
+                        ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                        : "bg-white text-gray-700 border-gray-300 hover:bg-primary hover:text-white"
+                    }
+                  `}
+                >
+                  ‹
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`
+                      w-9 h-9 rounded-full font-medium transition
+                      ${
+                        currentPage === page
+                          ? "bg-primary text-white shadow-md scale-110"
+                          : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                      }
+                    `}
+                    >
+                      {page}
+                    </button>
+                  ),
+                )}
+
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                  className={`
+                    w-9 h-9 rounded-full border transition
+                    ${
+                      currentPage === totalPages
+                        ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                        : "bg-white text-gray-700 border-gray-300 hover:bg-primary hover:text-white"
+                    }
+                  `}
+                >
+                  ›
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

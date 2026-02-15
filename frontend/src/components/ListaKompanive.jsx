@@ -11,59 +11,8 @@ function ListaKompanive() {
   const [kompanitePaKerkim, setKompanitePaKerkim] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [kerkoParams] = useSearchParams();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/kompania/kompanite",
-        );
-        if (response.data.success) {
-          setKompanitePaKerkim(response.data.data);
-        }
-      } catch (err) {
-        console.error(err);
-        setKompanitePaKerkim([]);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [kerkoParams]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const params = new URLSearchParams(kerkoParams);
-
-        if (params.toString()) {
-          const response = await axios.get(
-            `http://localhost:3000/api/kerkoKompanine?${params.toString()}`,
-          );
-          if (response.data.success) {
-            setKompanite(response.data.data || []);
-          } else {
-            console.error("Gabim ne kerkim:  ", response.data.error);
-          }
-        } else {
-          const response = await axios.get(
-            "http://localhost:3000/api/kompania/kompanite",
-          );
-          if (response.data.success) {
-            setKompanite(response.data.data || []);
-          }
-        }
-      } catch (err) {
-        console.error(err);
-        setKompanite([]);
-      }
-    };
-
-    fetchData();
-  }, [kerkoParams]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const itemsPerPage = 6;
 
@@ -153,97 +102,17 @@ function ListaKompanive() {
     fetchJobsCount();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/shpallja/kompania",
-        );
-        if (response.data.success) {
-          setShpalljaData(response.data.data);
-        }
-      } catch (err) {
-        console.error(err);
-        setShpalljaData([]);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const totalPages = Math.ceil(kompanite.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = kompanite.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div>
-      {/* Gradient Background Section - Same as ListaPuneve */}
+    <div className="min-h-screen bg-white">
+      {/* Gradient Hero Section */}
       <div className="bg-gradient-to-br from-[#F7FBFC] to-[#B9D7EA] pb-16 backdrop-blur-sm">
-        <Header />
+        <Header withGradient={true} />
 
-      <div className="max-w-7xl mx-auto px-6 pb-24">
-        {/* Hero Section */}
-        <div className="text-center mb-25 ">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Kompanitë
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Zbulo kompanitë më të mira që ofrojnë mundësi pune në platformën
-            tonë
-          </p>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 mt-10 max-w-4xl mx-auto">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md">
-              <p className="text-3xl font-bold text-gray-800 mb-2">
-                {kompanitePaKerkim.length}+
-              </p>
-              <p className="text-gray-600 text-sm">Kompani të Regjistruara</p>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md">
-              <p className="text-3xl font-bold text-gray-800 mb-2">
-                {shpalljaData.length}+
-              </p>
-              <p className="text-gray-600 text-sm">Vende Pune Aktive</p>
-            </div>
-          </div>
-          <div className="mt-20">
-            <Kerkimi />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {currentItems.map((k) => (
-            <div
-              key={k._id}
-              className="
-                bg-white rounded-3xl
-                shadow-lg hover:shadow-2xl
-                hover:-translate-y-2
-                transition-all duration-300
-                border border-gray-100
-                overflow-hidden
-              "
-            >
-              <KompaniaCard kompania={k} />
-            </div>
-          ))}
-        </div>
-
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-3 mt-16">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className={`
-                w-9 h-9 rounded-full border transition
-                ${
-                  currentPage === 1
-                    ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-white text-gray-700 border-gray-300 hover:bg-primary hover:text-white"
-                }
-              `}
         <div className="max-w-6xl mx-auto px-4 mt-20 mb-12">
           {/* Hero Section */}
           <div className="text-center mb-8">
@@ -306,16 +175,18 @@ function ListaKompanive() {
               </p>
             </div>
           </div>
-        </div>
 
-        {/* Search Component */}
-        <Kerkimi />
+          {/* Search Component */}
+          <div className="mt-20">
+            <Kerkimi />
+          </div>
+        </div>
       </div>
 
-      {/* Main Content Section - White Background */}
-      <div className="m-10 md:m-20 lg:m-30">
+      {/* Main Content Section */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Section Header */}
-        <div className="text-center mb-8 -mt-16">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-3">
             Gjej kompaninë që të përshtatet
           </h2>
@@ -366,19 +237,9 @@ function ListaKompanive() {
               ))}
             </div>
 
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`
-                  w-9 h-9 rounded-full font-medium transition
-                  ${
-                    currentPage === page
-                      ? "bg-primary text-white shadow-md scale-110"
-                      : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 my-10">
+              <div className="flex justify-center items-center gap-2 mt-16">
                 {/* Previous Button */}
                 <button
                   onClick={() =>
@@ -411,23 +272,6 @@ function ListaKompanive() {
                   <span className="hidden sm:inline">Prev</span>
                 </button>
 
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className={`
-                w-9 h-9 rounded-full border transition
-                ${
-                  currentPage === totalPages
-                    ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-white text-gray-700 border-gray-300 hover:bg-primary hover:text-white"
-                }
-              `}
-            >
-              ›
-            </button>
-          </div>
                 {/* Page Numbers */}
                 <div className="flex gap-1">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -436,7 +280,7 @@ function ListaKompanive() {
                         key={page}
                         onClick={() => setCurrentPage(page)}
                         className={`
-                          w-7 h-7 rounded-full font-medium transition-all duration-200
+                          w-9 h-9 rounded-full font-medium transition-all duration-200
                           ${
                             currentPage === page
                               ? "bg-primary text-white shadow-md scale-105"

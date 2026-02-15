@@ -88,78 +88,62 @@ function Ballina() {
 
             {/* Header - with relative positioning and white text */}
             <div className="relative z-10 header-white-text">
-              <Header withGradient={false} />
+              <Header />
             </div>
 
             {/* Hero Content */}
-            <div className="relative h-[600px]">
+            <div className="relative h-[600px] flex items-center justify-center">
               {/* Content Container */}
-              <div className="relative h-full max-w-7xl mx-auto px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full items-center">
-                  {/* Left Side - Text Content */}
-                  <div className="text-white z-10 pt-12 lg:pt-0">
-                    <h1 className="text-left text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                      Gjeni Punën e<br />
-                      Ëndrrave Tuaja
-                    </h1>
-                    <p className="text-xl lg:text-2xl mb-10 text-white/95 max-w-xl leading-relaxed">
-                      Lidhuni me mundësi të shkëlqyera karriere në kompani të
-                      njohura të Kosovës
-                    </p>
+              <div className="relative w-full max-w-4xl mx-auto px-6 text-center">
+                {/* Centered Text Content */}
+                <div className="text-white z-10">
+                  <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Gjeni Punën e Ëndrrave Tuaja
+                  </h1>
+                  <p className="text-xl lg:text-2xl mb-10 text-white/95 max-w-2xl leading-relaxed mx-auto">
+                    Lidhuni me mundësi të shkëlqyera karriere në kompani të
+                    njohura të Kosovës
+                  </p>
 
-                    <div className="flex flex-wrap gap-4 mb-16">
-                      <button
-                        onClick={() => navigate("/ListaPuneve")}
-                        className="px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                      >
-                        Shfleto Punët
-                      </button>
-                      <button
-                        onClick={() => navigate("/ListaKompanive")}
-                        className="px-8 py-4 bg-transparent text-white font-semibold rounded-lg border border-white hover:bg-white hover:text-primary transition-all duration-300"
-                      >
-                        Shfleto Kompanitë
-                      </button>
-                    </div>
-
-                    {/* Stats Section with increased bottom padding */}
-                    <div className="grid grid-cols-3 gap-8 pb-16">
-                      <div className="py-4">
-                        <div className="text-3xl font-bold mb-3">
-                          Punë të Verifikuara
-                        </div>
-                        <div className="text-sm text-white/90 font-medium leading-relaxed pb-2">
-                          Vetëm oferta të besueshme
-                        </div>
-                      </div>
-                      <div className="py-4">
-                        <div className="text-3xl font-bold mb-3">
-                          100% Falas
-                        </div>
-                        <div className="text-sm text-white/90 font-medium leading-relaxed pb-2">
-                          Pa tarifa të fshehura
-                        </div>
-                      </div>
-                      <div className="py-4">
-                        <div className="text-3xl font-bold mb-3">
-                          Mbështetje 24/7
-                        </div>
-                        <div className="text-sm text-white/90 font-medium leading-relaxed pb-2">
-                          Jemi këtu për ty
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flex flex-wrap gap-4 mb-16 justify-center">
+                    <button
+                      onClick={() => navigate("/ListaPuneve")}
+                      className="px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                    >
+                      Shfleto Punët
+                    </button>
+                    <button
+                      onClick={() => navigate("/ListaKompanive")}
+                      className="px-8 py-4 bg-transparent text-white font-semibold rounded-lg border border-white hover:bg-white hover:text-primary transition-all duration-300"
+                    >
+                      Shfleto Kompanitë
+                    </button>
                   </div>
 
-                  {/* Right Side - Professional Image */}
-                  <div className="hidden lg:flex relative h-full items-end justify-end">
-                    <div
-                      className="w-full max-w-md h-[600px] bg-contain bg-bottom bg-no-repeat"
-                      style={{
-                        backgroundImage: `url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80')`,
-                        filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.4))",
-                      }}
-                    />
+                  {/* Stats Section */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div className="py-4">
+                      <div className="text-3xl font-bold mb-3">
+                        Punë të Verifikuara
+                      </div>
+                      <div className="text-base text-white/90 font-medium leading-relaxed">
+                        Vetëm oferta të besueshme
+                      </div>
+                    </div>
+                    <div className="py-4">
+                      <div className="text-3xl font-bold mb-3">100% Falas</div>
+                      <div className="text-base text-white/90 font-medium leading-relaxed">
+                        Pa tarifa të fshehura
+                      </div>
+                    </div>
+                    <div className="py-4">
+                      <div className="text-3xl font-bold mb-3">
+                        Mbështetje 24/7
+                      </div>
+                      <div className="text-base text-white/90 font-medium leading-relaxed">
+                        Jemi këtu për ty
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
