@@ -86,6 +86,20 @@ function MenaxhoAplikimet() {
     });
   };
 
+  const getExpirationDate = (creationDate) => {
+    const date = new Date(creationDate);
+    date.setDate(date.getDate() + 30);
+    return date;
+  };
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -327,6 +341,7 @@ function MenaxhoAplikimet() {
                 <tr>
                   <th className="tableHead">Pozita</th>
                   <th className="tableHead">Data e Aplikimit</th>
+                  <th className="tableHead">Data e Skadimit Te Shpalljes</th>
                   <th className="tableHead">Lokacioni</th>
                   <th className="tableHead text-center ">Orari</th>
                   <th className="tableHead">Statusi</th>
@@ -340,6 +355,11 @@ function MenaxhoAplikimet() {
                   const shpallja = shpalljaData.find(
                     (sh) => sh._id === aplikimi.shpalljaId,
                   );
+                  const expirationDate = shpallja?.dataKrijimit 
+                    ? getExpirationDate(shpallja.dataKrijimit)
+                    : null;
+                  const isExpired = shpallja?.status?.toLowerCase() === "skaduar";
+
                   return (
                     <tr key={aplikimi._id} className="hover:bg-gray-50">
                       <td className="px-6 py-4">
@@ -358,6 +378,20 @@ function MenaxhoAplikimet() {
                             day: "numeric",
                             year: "numeric",
                           },
+                        )}
+                      </td>
+                      <td className="tableData">
+                        {expirationDate ? (
+                          <span className={isExpired ? "text-red-600 font-medium" : "text-gray-500"}>
+                            {formatDate(expirationDate)}
+                            {isExpired && (
+                              <span className="ml-2 text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded-full">
+                                Skaduar
+                              </span>
+                            )}
+                          </span>
+                        ) : (
+                          "N/A"
                         )}
                       </td>
                       <td className="tableData">

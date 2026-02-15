@@ -79,11 +79,6 @@ function PunetRuajtura() {
             <h2 className="text-2xl font-semibold text-gray-700 mb-2">
               Nuk keni punë të ruajtura
             </h2>
-            <p className="text-gray-500 text-lg">
-              Klikoni ikonën e bookmark-ut{" "}
-              <span className="inline-block mx-1">📑</span> për të ruajtur punë
-              që ju interesojnë
-            </p>
           </div>
         ) : (
           <>

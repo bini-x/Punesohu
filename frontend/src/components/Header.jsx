@@ -201,7 +201,7 @@ function Header() {
                   className="flex items-center space-x-3 px-4 py-2.5 rounded-xl hover:bg-[#D6E6F2] transition-all duration-300  hover:shadow-sm group"
                 >
                   <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300 bg-gray-200">
-                    {perdoruesiData?.foto ? (
+                    {perdoruesiData?.foto?.data ? (
                       <img
                         src={`http://localhost:3000/api/profili/${perdoruesiData._id}/foto`}
                         alt="Profile"

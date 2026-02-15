@@ -460,9 +460,16 @@ function MenaxhoShpalljet() {
                   <th className="tableHead">Data e Publikimit</th>
                   <th className="tableHead">Lokacioni</th>
                   <th className="tableHead text-center">Orari</th>
-                  <th className="tableHead">Aplikimet ne Pritje</th>
-                  <th className="tableHead">Aplikimet e Pranuara</th>
-                  <th className="tableHead">Aplikimet e Refuzuara</th>
+
+                  {filtrimiFaqes !== "Active" ? (
+                  <>
+                    <th className="tableHead">Aplikimet ne Pritje</th>
+                    <th className="tableHead">Aplikimet e Pranuara</th>
+                    <th className="tableHead">Aplikimet e Refuzuara</th>
+                  </>
+                  ): (
+                    <th className="tableHead">Aplikimet</th>
+                  )}
                   <th className="tableHead text-right">Veprime</th>
                 </tr>
               </thead>
@@ -500,7 +507,9 @@ function MenaxhoShpalljet() {
                         {sh.numriNePritje} aplikant
                       </button>
                     </td>
-                    <td className="tableData">
+                    {filtrimiFaqes !== "Active" && (
+                      <>
+                                        <td className="tableData">
                       <button
                         onClick={(e) => shfaqAplikantPranuar(e, sh)}
                         className="text-sm text-indigo-600 hover:text-indigo-900 font-medium"
@@ -516,6 +525,9 @@ function MenaxhoShpalljet() {
                         {sh.numriRefuzuar} aplikant
                       </button>
                     </td>
+                    </>
+
+                    )}
                     <td className="tableData text-right text-sm font-medium">
                       <div className="relative">
                         <button

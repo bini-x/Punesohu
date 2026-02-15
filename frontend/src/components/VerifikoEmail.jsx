@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import "../index.css";
 import { useState } from "react";
 import axios from "axios";
+import { useAlert } from "../contexts/AlertContext";
 
 function VerifikoEmail() {
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
   const [kodiVerifikimit, setKodiVerifikimit] = useState("");
 
   const handleSubmit = async (e) => {
@@ -22,12 +24,12 @@ function VerifikoEmail() {
       );
 
       if (response.data.success || response.data.status) {
-        alert("Verifikimi perfundoj me sukses");
+        showAlert("Verifikimi perfundoj me sukses", "success");
         navigate("/kycja");
       }
     } catch (error) {
       if (error.response.data.error.includes("Kodi eshte gabim")) {
-        alert("Kodi eshte gabim");
+        showAlert("Kodi eshte gabim", "error");
       }
     }
   };
