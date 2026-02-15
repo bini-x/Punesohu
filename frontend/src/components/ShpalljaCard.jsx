@@ -27,14 +27,18 @@ function ShpalljaCard({ shpallja }) {
     const now = new Date();
     const diffMs = expires - now;
 
-    if (diffMs <= 1) return "AlmostExpired";
-
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     if (diffDays === 0) {
       const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-      return `${diffHours} hour${diffHours !== 1 ? "s" : ""} left`;
+      return {
+        label: `${diffHours} orë${diffHours !== 1 ? "të mbetura" : "e mbeturë"}`,
+        isUrgent: true,
+      };
     }
-    return `${diffDays} dite`;
+    return {
+      label: `${diffDays} ditë`,
+      isUrgent: diffDays < 5,
+    };
   };
 
   const timeRemaining = getRemainingTime();
@@ -209,10 +213,11 @@ function ShpalljaCard({ shpallja }) {
             {shpallja.orari[0]}
           </span>
         )}
+
         {timeRemaining && (
           <span
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
-              timeRemaining === "AlmostExpired"
+              timeRemaining.isUrgent
                 ? "bg-red-100 text-red-700"
                 : "bg-yellow-100 text-yellow-800"
             }`}
@@ -220,12 +225,10 @@ function ShpalljaCard({ shpallja }) {
             <FontAwesomeIcon
               icon={faClock}
               className={
-                timeRemaining === "AlmostExpired"
-                  ? "text-red-600"
-                  : "text-yellow-600"
+                timeRemaining.isUrgent ? "text-red-600" : "text-yellow-600"
               }
             />
-            {timeRemaining}
+            {timeRemaining.label}
           </span>
         )}
       </div>
@@ -248,11 +251,11 @@ function ShpalljaCard({ shpallja }) {
           className="relative group/button bg-transparent cursor-pointer"
           onClick={handleClick}
         >
-          <div
-            className={`${perdoruesiData?.tipiPerdoruesit === "punedhenes" ? "hidden" : "block"}`}
-          >
+          <div className={`}`}>
             <span className="relative z-10 bg-gradient-to-r from-slate-700 via-gray-800 to-black bg-clip-text text-transparent font-semibold text-sm group-hover/button:from-slate-800 group-hover/button:via-gray-900 group-hover/button:to-black transition-all duration-300">
-              Apliko tani
+              {perdoruesiData?.tipiPerdoruesit === "punedhenes"
+                ? "Shiko me shume"
+                : "Apliko tani"}
             </span>
             <FontAwesomeIcon
               icon={faArrowRightLong}
