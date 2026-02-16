@@ -57,7 +57,7 @@ const aplikimiSchema = new mongoose.Schema({
   },
   letraMotivuese: {
     type: String,
-    required: true,
+    required: false,
   },
   status: {
     type: String,

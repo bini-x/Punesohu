@@ -23,6 +23,7 @@ router.post("/perdoruesi", async (req, res) => {
         emri: perdoruesi.emri,
         mbiemri: perdoruesi.mbiemri,
         email: perdoruesi.email,
+        nrTelefonit: perdoruesi.nrTelefonit,
         tipiPerdoruesit: perdoruesi.tipiPerdoruesit,
         aftesite: perdoruesi.aftesite,
         foto: {
@@ -37,6 +38,7 @@ router.post("/perdoruesi", async (req, res) => {
         _id: perdoruesi._id,
         kompania: perdoruesi.kompania,
         email: perdoruesi.email,
+        nrTelefonit: perdoruesi.nrTelefonit,
         tipiPerdoruesit: perdoruesi.tipiPerdoruesit,
         foto: {
           emriFoto: perdoruesi.foto.emriFoto,
@@ -92,6 +94,7 @@ router.get("/perdoruesi", async (req, res) => {
         kompania: perdoruesi.kompania,
         tipiPerdoruesit: perdoruesi.tipiPerdoruesit,
         aftesite: perdoruesi.aftesite,
+        nrTelefonit: perdoruesi.nrTelefonit,
         foto: {
           emriFoto: perdoruesi.foto.emriFoto,
           mimetype: perdoruesi.foto.mimetype,

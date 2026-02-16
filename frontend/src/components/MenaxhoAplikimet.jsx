@@ -148,21 +148,6 @@ function MenaxhoAplikimet() {
       return;
     }
 
-    if (!aplikimiKlikuar.nrTelefonit?.trim()) {
-      showAlert("Ju lutem shkruani numrin e telefonit", "warning");
-      return;
-    }
-
-    if (!aplikimiKlikuar.eksperienca?.trim()) {
-      showAlert("Ju lutem zgjidhni nivelin e eksperiencës", "warning");
-      return;
-    }
-
-    if (!aplikimiKlikuar.letraMotivuese?.trim()) {
-      showAlert("Ju lutem shkruani letrën motivuese", "warning");
-      return;
-    }
-
     setIsSaving(true);
     try {
       const formData = new FormData();
@@ -698,7 +683,7 @@ function MenaxhoAplikimet() {
 
                 <div>
                   <label htmlFor="nrTelefonit" className="labelTabela">
-                    Nr. Telefonit <span className="text-red-500">*</span>
+                    Nr. Telefonit
                   </label>
                   <input
                     id="nrTelefonit"
@@ -707,13 +692,12 @@ function MenaxhoAplikimet() {
                     onChange={modifikoAplikimin}
                     className="input-ShpalljaProfil"
                     placeholder="+383 XX XXX XXX"
-                    required
                   />
                 </div>
 
                 <div>
                   <label htmlFor="eksperienca" className="labelTabela">
-                    Eksperienca <span className="text-red-500">*</span>
+                    Eksperienca
                   </label>
                   <input
                     id="eksperienca"
@@ -722,13 +706,12 @@ function MenaxhoAplikimet() {
                     onChange={modifikoAplikimin}
                     className="input-ShpalljaProfil"
                     placeholder="3 vjet"
-                    required
                   />
                 </div>
 
                 <div>
                   <label htmlFor="letraMotivuese" className="labelTabela">
-                    Letra Motivuese <span className="text-red-500">*</span>
+                    Letra Motivuese
                   </label>
                   <textarea
                     id="letraMotivuese"
@@ -737,7 +720,6 @@ function MenaxhoAplikimet() {
                     rows="5"
                     className="input-ShpalljaProfil"
                     placeholder="Shkruaj letrën motivuese..."
-                    required
                   />
                 </div>
 

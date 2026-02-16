@@ -21,7 +21,7 @@ import { useAlert } from "../contexts/AlertContext";
 
 function ProfiliKompanise() {
   const navigate = useNavigate();
-  const { showAlert, showConfirm, hideConfirm } = useAlert();
+  const { showAlert, showConfirm } = useAlert();
   const { id } = useParams();
   const { perdoruesiData, setPerdoruesiData } = Perdoruesi.usePerdoruesi();
   const [shfaqLinkeForm, setShfaqLinkeForm] = useState(false);
@@ -363,7 +363,7 @@ function ProfiliKompanise() {
           <div className="absolute top-6 right-6" style={{ zIndex: 2 }}>
             <button
               onClick={() => navigate("/publikopune")}
-              className="flex items-center gap-2 px-5 py-2.5 bg-white text-gray-800 border border-gray-400 rounded-xl hover:shadow-lg transition-all duration-200 font-medium"
+              className="flex items-center gap-2 px-5 py-2.5 bg-white text-gray-800 border border-gray-400 rounded-xl hover:shadow-lg hover:bg-[#F5F7F8] transition-all duration-200 font-medium"
             >
               <Upload size={18} />
               Publiko Punë
@@ -490,7 +490,7 @@ function ProfiliKompanise() {
                         });
                         setEditKompaniaMode(true);
                       }}
-                      className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/60 hover:bg-[#F5F7F8] border border-gray-300 transition-all duration-200"
+                      className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/60 hover:bg-[#F5F7F8] transition-all duration-200"
                       title="Modifiko profilin"
                     >
                       <Edit2 size={18} className="text-gray-700" />

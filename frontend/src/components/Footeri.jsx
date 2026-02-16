@@ -43,7 +43,7 @@ function Footer() {
               <Link to="Regjistrimi">Regjistro Kompani</Link>
             </li>
             <li className="hover:text-white cursor-pointer">
-              <Link to="ListaKompanive">Lista e Kompanive</Link>
+              <Link to="ListaAplikanteve">Lista e Aplikanteve</Link>
             </li>
             <li className="hover:text-white cursor-pointer">
               <Link to="RrethNesh">Rreth Nesh</Link>

@@ -12,17 +12,19 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useAlert } from "../contexts/AlertContext";
+import Perdoruesi from "../PerdoruesiContext";
 
 function Aplikimi() {
   const { showAlert } = useAlert();
+  const { perdoruesiData } = Perdoruesi.usePerdoruesi();
   const [shpallja, setShpallja] = useState(null);
   const [aplikimi, setAplikimi] = useState({
     emailKompanise: "",
-    emailAplikantit: "",
-    emriAplikantit: "",
-    mbiemriAplikantit: "",
+    emailAplikantit: perdoruesiData?.email || "",
+    emriAplikantit: perdoruesiData?.emri || "",
+    mbiemriAplikantit: perdoruesiData?.mbiemri || "",
     eksperienca: "",
-    nrTelefonit: "",
+    nrTelefonit: perdoruesiData?.nrTelefonit || "",
     letraMotivuese: "",
   });
   const [cvFile, setCvFile] = useState(null);
@@ -48,6 +50,18 @@ function Aplikimi() {
       fetchData();
     }
   }, [id]);
+
+  useEffect(() => {
+    if (perdoruesiData) {
+      setAplikimi((prev) => ({
+        ...prev,
+        emailAplikantit: perdoruesiData.email || "",
+        emriAplikantit: perdoruesiData.emri || "",
+        mbiemriAplikantit: perdoruesiData.mbiemri || "",
+        nrTelefonit: perdoruesiData.nrTelefonit || "",
+      }));
+    }
+  }, [perdoruesiData]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -86,24 +100,6 @@ function Aplikimi() {
 
     if (!aplikimi.emailAplikantit) {
       showAlert("Ju lutem plotësoni email-in", "warning");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (!aplikimi.nrTelefonit) {
-      showAlert("Ju lutem plotësoni numrin e telefonit", "warning");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (!aplikimi.eksperienca) {
-      showAlert("Ju lutem zgjidhni nivelin e eksperiencës", "warning");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (!aplikimi.letraMotivuese) {
-      showAlert("Ju lutem shkruani letrën motivuese", "warning");
       setIsSubmitting(false);
       return;
     }
@@ -187,10 +183,49 @@ function Aplikimi() {
       </div>
     );
   }
+  if (perdoruesiData?.tipiPerdoruesit !== "aplikant") {
+    return (
+      <div className="min-h-screen">
+        <Header withGradient={true} />
+        <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-md text-center">
+            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-8 h-8 text-yellow-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Qasje e ndaluar
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Vetëm aplikantët mund të aplikojnë. Nëse jeni aplikant, ju lutemi
+              kycuni/regjistrohuni si i tillë.
+            </p>
+            <a
+              href="/kycja"
+              className="inline-block px-6 py-3 bg-gradient-to-r from-[#0F4C75] to-[#3282B8] text-white rounded-lg font-semibold hover:from-[#3282B8] hover:to-[#0F4C75] transition-all duration-300"
+            >
+              Kycu
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F5F7F8]">
-      <Header />
+      <Header withGradient={true} />
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -219,7 +254,7 @@ function Aplikimi() {
               <Building2 className="w-5 h-5 text-primary" />
               <div>
                 <span className="text-sm text-gray-500">Kompania:</span>
-                <p className="font-semibold">{shpallja.emailKompanise}</p>
+                <p className="font-semibold">{shpallja.emriKompanise}</p>
               </div>
             </div>
           </div>
@@ -308,7 +343,6 @@ function Aplikimi() {
                 <input
                   id="telefon"
                   type="tel"
-                  required
                   className="input-aplikimi pl-2"
                   placeholder="+383 44 123 456"
                   value={aplikimi.nrTelefonit}
@@ -318,9 +352,7 @@ function Aplikimi() {
                 />
               </div>
               <div className="col-span-1">
-                <label htmlFor="eksperienca">
-                  Eksperienca<span className="text-red-500">*</span>
-                </label>
+                <label htmlFor="eksperienca">Eksperienca </label>
                 <select
                   id="eksperienca"
                   className="input-aplikimi pl-2"
@@ -328,7 +360,6 @@ function Aplikimi() {
                   onChange={(e) =>
                     setAplikimi({ ...aplikimi, eksperienca: e.target.value })
                   }
-                  required
                 >
                   <option value="" disabled>
                     Eksperienca
@@ -367,9 +398,7 @@ function Aplikimi() {
             </div>
 
             <div>
-              <label htmlFor="letraMotivuese">
-                Letra Motivuese <span className="text-red-500">*</span>
-              </label>
+              <label htmlFor="letraMotivuese">Letra Motivuese</label>
               <textarea
                 id="letraMotivuese"
                 rows="6"
@@ -379,7 +408,6 @@ function Aplikimi() {
                 onChange={(e) =>
                   setAplikimi({ ...aplikimi, letraMotivuese: e.target.value })
                 }
-                required
               ></textarea>
             </div>
 

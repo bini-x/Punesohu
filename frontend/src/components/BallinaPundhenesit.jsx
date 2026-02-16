@@ -224,7 +224,6 @@ function BallinaPundhenesit() {
               {currentItems.map((a, index) => (
                 <div
                   key={a._id}
-                  className="bg-white/60 rounded-2xl shadow-lg transition-colors duration-200 "
                   style={{
                     animation: `fadeInUp 0.4s ease-out ${index * 0.08}s both`,
                   }}

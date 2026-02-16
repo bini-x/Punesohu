@@ -208,7 +208,7 @@ function PublikoPune() {
   if (perdoruesiData?.tipiPerdoruesit !== "punedhenes") {
     return (
       <div className="min-h-screen">
-        <Header />
+        <Header withGradient={true} />
         <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-md text-center">
             <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -231,13 +231,13 @@ function PublikoPune() {
             </h2>
             <p className="text-gray-600 mb-6">
               Vetëm punëdhënësit mund të publikojnë punë. Nëse jeni punëdhënës,
-              ju lutemi regjistrohuni si i tillë.
+              ju lutemi kycuni/regjistrohuni si i tillë.
             </p>
             <a
-              href="/"
+              href="/kycja"
               className="inline-block px-6 py-3 bg-gradient-to-r from-[#0F4C75] to-[#3282B8] text-white rounded-lg font-semibold hover:from-[#3282B8] hover:to-[#0F4C75] transition-all duration-300"
             >
-              Kthehu në ballina
+              Kycu
             </a>
           </div>
         </div>
@@ -313,27 +313,58 @@ function PublikoPune() {
                     <option value="" hidden disabled>
                       Zgjedh kategorinë
                     </option>
-                    <option value="IT">IT</option>
-                    <option value="teknologji-informacioni">
-                      Teknologji e Informacionit
+                    <option value="Iindustria">Industria</option>
+                    <option value="Administrate">Administratë</option>
+                    <option value="Agrikulture-Industri-Ushqimore">
+                      Agrikulturë dhe Industri Ushqimore
                     </option>
-                    <option value="marketing-reklamim-pr">
-                      Marketing, Reklamim & PR
+                    <option value="Arkitekture">Arkitekturë</option>
+                    <option value="Banka">Banka</option>
+                    <option value="Retail-Distribuim">
+                      Retail dhe Distribuim
                     </option>
-                    <option value="administrate">Administratë</option>
-                    <option value="ekonomi-finance-kontabilitet">
+                    <option value="Ndertimtari-Patundshmeri">
+                      Ndërtimtari & Patundshmëri
+                    </option>
+                    <option value="Mbeshtetje-Konsumatoreve-Call-Center">
+                      Mbështetje e Konsumatorëve, Call Center
+                    </option>
+                    <option value="Ekonomi-Finance-Kontabilitet">
                       Ekonomi, Financë, Kontabilitet
                     </option>
-                    <option value="burime-njerezore">Burime Njerëzore</option>
-                    <option value="inxhinieri">Inxhinieri</option>
-                    <option value="shendetesi-medicine">
-                      Shëndetësi, Medicinë
-                    </option>
-                    <option value="edukim-shkence-hulumtim">
+                    <option value="Edukim-Shkence-Hulumtim">
                       Edukim, Shkencë & Hulumtim
                     </option>
-                    <option value="retail-distribuim">
-                      Retail dhe Distribuim
+                    <option value="Pune-Te-Pergjithshme">
+                      Punë të Përgjithshme
+                    </option>
+                    <option value="Burime-Njerezore">Burime Njerëzore</option>
+                    <option value="Teknologji-Informacioni">
+                      Teknologji e Informacionit
+                    </option>
+                    <option value="Sigurim">Sigurim</option>
+                    <option value="Gazetari-Shtyp-Media">
+                      Gazetari, Shtyp & Media
+                    </option>
+                    <option value="Ligj-Legjislacion">
+                      Ligj & Legjislacion
+                    </option>
+                    <option value="Menaxhment">Menaxhment</option>
+                    <option value="Marketing-Reklamim-Pr">
+                      Marketing, Reklamim & PR
+                    </option>
+                    <option value="Inxhinieri">Inxhinieri</option>
+                    <option value="Shendetesi-Medicine">
+                      Shëndetësi, Medicinë
+                    </option>
+                    <option value="Prodhim">Prodhim</option>
+                    <option value="Siguri$Mbrojtje">Siguri&Mbrojtje</option>
+                    <option value="Industri te sherbimit">
+                      Industri te sherbimit
+                    </option>
+                    <option value="Telekomunikim">Telekomunikim</option>
+                    <option value="Tekstil, Lekure, Industri Veshembathje">
+                      Tekstil, Lekure, Industri Veshembathje
                     </option>
                     <option value="Gastronomi, Hoteleri, Turizem">
                       Gastronomi, Hoteleri, Turizem
@@ -341,6 +372,7 @@ function PublikoPune() {
                     <option value="Transport, Logjistike">
                       Transport, Logjistike
                     </option>
+                    <option value="IT">IT</option>
                   </select>
                 </div>
 

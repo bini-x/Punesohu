@@ -843,7 +843,7 @@ function ProfiliAplikantit() {
                           profesioni: perdoruesiData?.profesioni || "",
                         });
                       }}
-                      className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/60 hover:bg-[#F5F7F8] border border-gray-300 transition-all duration-200"
+                      className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/60 hover:bg-[#F5F7F8] transition-all duration-200"
                       title="Modifiko profilin"
                     >
                       <Edit2 size={18} className="text-gray-700" />

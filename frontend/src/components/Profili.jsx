@@ -10,7 +10,7 @@ function Profili() {
   if (!perdoruesiData) {
     return (
       <div className="min-h-screen">
-        <Header />
+        <Header withGradient={true} />
         <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-md text-center">
             <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">

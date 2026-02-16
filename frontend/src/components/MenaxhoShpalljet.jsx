@@ -1119,6 +1119,17 @@ function MenaxhoShpalljet() {
                     {shpalljaZgjedhurPerAplikante.pozitaPunes} - Aplikantët e
                     Pranuar
                   </h2>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-4 py-1.5 flex justify-between items-center gap-2 rounded-full text-sm font-semibold">
+                      <User size={16} />{" "}
+                      {aplikimet.filter((a) => a.status === "Pranuar").length}{" "}
+                      Aplikantë të Pranuar
+                    </span>
+                    <span className="px-4 py-1.5 rounded-full text-sm font-semibold">
+                      <FontAwesomeIcon icon={faLocationDot} />
+                      {shpalljaZgjedhurPerAplikante.lokacioniPunes}
+                    </span>
+                  </div>
                 </div>
                 <button
                   onClick={mbyllPopupPranuar}
@@ -1200,6 +1211,17 @@ function MenaxhoShpalljet() {
                     {shpalljaZgjedhurPerAplikante.pozitaPunes} - Aplikantët e
                     Refuzuar
                   </h2>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-4 py-1.5 flex justify-between items-center gap-2 rounded-full text-sm font-semibold">
+                      <User size={16} />{" "}
+                      {aplikimet.filter((a) => a.status === "Refuzuar").length}{" "}
+                      Aplikantë të Refuzuar
+                    </span>
+                    <span className="px-4 py-1.5 rounded-full text-sm font-semibold">
+                      <FontAwesomeIcon icon={faLocationDot} />
+                      {shpalljaZgjedhurPerAplikante.lokacioniPunes}
+                    </span>
+                  </div>
                 </div>
                 <button
                   onClick={mbyllPopupRefuzuar}
@@ -1363,29 +1385,33 @@ function MenaxhoShpalljet() {
                 </p>
               </div>
 
-              <div className="detajetAplikantit">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 flex items-center justify-center">
-                    <Phone size={16} />
+              {aplikimiKlikuar.nrTelefonit !== "" && (
+                <div className="detajetAplikantit">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 flex items-center justify-center">
+                      <Phone size={16} />
+                    </div>
+                    <span className="spanAplikanti">Nr-Tel</span>
                   </div>
-                  <span className="spanAplikanti">Nr-Tel</span>
+                  <p className="px-1.5 text-base font-medium text-gray-900">
+                    {aplikimiKlikuar.nrTelefonit}
+                  </p>
                 </div>
-                <p className="px-1.5 text-base font-medium text-gray-900">
-                  {aplikimiKlikuar.nrTelefonit}
-                </p>
-              </div>
+              )}
 
-              <div className="detajetAplikantit">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 flex items-center justify-center">
-                    <BriefcaseBusiness size={16} />
+              {aplikimiKlikuar.eksperienca !== "" && (
+                <div className="detajetAplikantit">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 flex items-center justify-center">
+                      <BriefcaseBusiness size={16} />
+                    </div>
+                    <span className="spanAplikanti">Eksperienca</span>
                   </div>
-                  <span className="spanAplikanti">Eksperienca</span>
+                  <p className="px-1.5 text-base font-medium text-gray-900">
+                    {aplikimiKlikuar.eksperienca}
+                  </p>
                 </div>
-                <p className="px-1.5 text-base font-medium text-gray-900">
-                  {aplikimiKlikuar.eksperienca}
-                </p>
-              </div>
+              )}
 
               {aplikimiKlikuar.aftesite &&
                 aplikimiKlikuar.aftesite.length > 0 && (
@@ -1409,37 +1435,39 @@ function MenaxhoShpalljet() {
                   </div>
                 )}
 
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 flex items-center justify-center">
-                    <FileText size={16} />
+              {aplikimiKlikuar.letraMotivuese && (
+                <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 flex items-center justify-center">
+                      <FileText size={16} />
+                    </div>
+                    <span className="spanAplikanti">Letra Motivuese</span>
                   </div>
-                  <span className="spanAplikanti">Letra Motivuese</span>
+                  <div className="bg-linear-to-br from-gray-50 to-gray-100/50 rounded-lg p-4 max-h-48 overflow-y-auto border border-gray-200">
+                    <p className="px-1.5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+                      {aplikimiKlikuar.letraMotivuese}
+                    </p>
+                  </div>
                 </div>
-                <div className="bg-linear-to-br from-gray-50 to-gray-100/50 rounded-lg p-4 max-h-48 overflow-y-auto border border-gray-200">
-                  <p className="px-1.5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
-                    {aplikimiKlikuar.letraMotivuese}
-                  </p>
-                </div>
-              </div>
+              )}
 
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
                 <div className="flex justify-between items-center bg-linear-to-br from-gray-50 to-gray-100/50 rounded-lg p-4 border border-gray-200">
                   <p className="px-1.5 text-sm text-gray-700 font-medium">
-                    {aplikimiKlikuar.emriFileCv}
+                    Cv:{" "}
+                    <span
+                      className="underline text-blue-500 cursor-pointer"
+                      onClick={() =>
+                        handleDownloadCv(
+                          aplikimiKlikuar._id,
+                          aplikimiKlikuar.emriFileCv,
+                        )
+                      }
+                    >
+                      {" "}
+                      {aplikimiKlikuar.emriFileCv}
+                    </span>
                   </p>
-                  <button
-                    type="button"
-                    className="publikoPune"
-                    onClick={() =>
-                      handleDownloadCv(
-                        aplikimiKlikuar._id,
-                        aplikimiKlikuar.emriFileCv,
-                      )
-                    }
-                  >
-                    Shkarko CV
-                  </button>
                 </div>
               </div>
 
@@ -1485,18 +1513,22 @@ function MenaxhoShpalljet() {
             </div>
 
             <div className="px-6 py-4 bg-white/80 backdrop-blur-lg border-t border-gray-100 rounded-b-2xl flex justify-end items-center gap-3">
-              <button
-                onClick={mbyllAplikimin}
-                className="px-5 py-2.5 text-sm text-white font-semibold hover:text-black bg-primary hover:bg-white hover:border rounded-xl transition-all duration-200"
-              >
-                Mbyll
-              </button>
-              <button
-                onClick={ruajNdryshimetAplikimit}
-                className="px-5 py-2.5 text-sm text-white font-semibold hover:text-black bg-primary hover:bg-white hover:border rounded-xl transition-all duration-200"
-              >
-                Ruaj Ndryshimet
-              </button>
+              {filtrimiFaqes !== "Aktive" && (
+                <>
+                  <button
+                    onClick={mbyllAplikimin}
+                    className="px-5 py-2.5 text-sm text-white font-semibold hover:text-black bg-primary hover:bg-white hover:border rounded-xl transition-all duration-200"
+                  >
+                    Mbyll
+                  </button>
+                  <button
+                    onClick={ruajNdryshimetAplikimit}
+                    className="px-5 py-2.5 text-sm text-white font-semibold hover:text-black bg-primary hover:bg-white hover:border rounded-xl transition-all duration-200"
+                  >
+                    Ruaj Ndryshimet
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

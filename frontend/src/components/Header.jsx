@@ -378,14 +378,11 @@ function Header({ withGradient = false, forceNonHomePage = false }) {
                   <>
                     <Link
                       to="/kycja"
-                      className="px-5 py-2.5 border-2 border-[#0F4C75] rounded-xl text-[#0F4C75] font-semibold hover:bg-[#0F4C75] hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                      className="px-5 py-2.5 border border-[#0F4C75] rounded-xl text-[#0F4C75] font-semibold hover:bg-[#0F4C75] hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                     >
                       Kycu/Regjistrohu
                     </Link>
-                    <Link
-                      to="/kycja"
-                      className="px-5 py-2.5 bg-gradient-to-r from-[#0F4C75] to-[#3282B8] rounded-xl text-white font-semibold hover:from-[#3282B8] hover:to-[#0F4C75] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                    >
+                    <Link to="/kycja" className="publikoPune">
                       Publiko Pune
                     </Link>
                   </>
