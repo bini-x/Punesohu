@@ -441,11 +441,10 @@ router.put("/:id", async (req, res) => {
           try {
             await dergoNdryshimPune(
               email,
-              app.emriAplikantit || "Aplikant",
+              app.emriAplikantit || "",
               shpallja.pozitaPunes,
               shpallja.emriKompanise,
-              `Shpallja e punës "${shpallja.pozitaPunes}" tek kompania "${shpallja.emriKompanise}" është përditësuar. ` +
-                `Ju lutemi kontrolloni faqen për detaje të reja.`,
+              `Ju lutemi kontrolloni aplikimin për detaje të reja.`,
             );
           } catch (emailErr) {
             console.error(`Email dështoi për ${email}:`, emailErr);
