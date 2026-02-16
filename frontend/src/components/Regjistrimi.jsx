@@ -189,7 +189,7 @@ function Regjistrimi() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4 bg-linear-to-br from-[#F7FBFC] to-[#B9D7EA] pb-10  shadow-[#0F4C75]">
+    <div className="flex justify-center items-center min-h-screen p-4 bg-[#F5F7F8] pb-10  shadow-[#0F4C75]">
       <div
         className="w-full max-w-162.5
                 bg-white rounded-lg shadow-2xl 

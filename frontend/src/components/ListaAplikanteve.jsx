@@ -93,7 +93,7 @@ function ListaAplikanteve() {
   const currentItems = aplikantet.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F5F7F8]">
       {/* Gradient Hero Section */}
       <div className="bg-gradient-to-br from-[#F7FBFC] to-[#B9D7EA] pb-16 backdrop-blur-sm">
         <Header withGradient={false} />
