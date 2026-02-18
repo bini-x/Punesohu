@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "../index.css";
 import Header from "./Header";
+import { useAlert } from "../contexts/AlertContext";
 
 function LlogaritPagen() {
   const [punaDhënesi, setPunaDhënesi] = useState("Primar");
+  const { showAlert } = useAlert();
   const [bruto, setBruto] = useState("");
   const [kontributPunëtor, setKontributPunëtor] = useState("5");
   const [kontributPunëdhënes, setKontributPunëdhënes] = useState("5");
@@ -20,7 +22,7 @@ function LlogaritPagen() {
     let value = e.target.value;
     value = value.replace(/[^0-9.]/g, "");
     value = value.replace(/^0+(?=\d)/, "");
-    if (value === "" || (parseFloat(value) >= 5 && parseFloat(value) <= 15)) {
+    if (value === "" || (parseFloat(value) >= 0 && parseFloat(value) <= 15)) {
       setKontributPunëtor(value);
     }
   };
@@ -29,7 +31,7 @@ function LlogaritPagen() {
     let value = e.target.value;
     value = value.replace(/[^0-9.]/g, "");
     value = value.replace(/^0+(?=\d)/, "");
-    if (value === "" || (parseFloat(value) >= 5 && parseFloat(value) <= 15)) {
+    if (value === "" || (parseFloat(value) >= 0 && parseFloat(value) <= 15)) {
       setKontributPunëdhënes(value);
     }
   };
@@ -38,6 +40,15 @@ function LlogaritPagen() {
     const brutoNum = parseFloat(bruto) || 0;
     const kontributPunëtorNum = parseFloat(kontributPunëtor) || 5;
     const kontributPunëdhënesNum = parseFloat(kontributPunëdhënes) || 5;
+
+    if (kontributPunëtorNum < 5 || kontributPunëtorNum > 15) {
+      showAlert("Kontributi i punëtorit duhet të jetë 5% - 15%", "error");
+      return;
+    }
+    if (kontributPunëdhënesNum < 5 || kontributPunëdhënesNum > 15) {
+      showAlert("Kontributi i punëdhënësit duhet të jetë 5% - 15%", "error");
+      return;
+    }
 
     const kontributPunëtorVlera = brutoNum * (kontributPunëtorNum / 100);
     const kontributPunëdhënesVlera = brutoNum * (kontributPunëdhënesNum / 100);
@@ -309,4 +320,3 @@ function LlogaritPagen() {
 }
 
 export default LlogaritPagen;
-
