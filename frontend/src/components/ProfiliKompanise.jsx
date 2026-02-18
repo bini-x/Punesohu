@@ -41,8 +41,15 @@ function ProfiliKompanise() {
         const response = await axios.get(
           "http://localhost:3000/api/shpallja/kompania/im",
         );
-        if (response.data.success && response.data.data.status === "aktiv") {
-          setPuneHapura(response.data.data);
+        console.log(response.data);
+
+        if (response.data.success && Array.isArray(response.data.data)) {
+          const activeJobs = response.data.data.filter(
+            (job) => job.status === "aktiv",
+          );
+          setPuneHapura(activeJobs);
+        } else {
+          setPuneHapura([]);
         }
       } catch (error) {
         console.error(error);
