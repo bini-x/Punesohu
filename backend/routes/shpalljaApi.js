@@ -152,7 +152,6 @@ router.get("/:id", async (req, res) => {
 
     const shpalljaObj = shpallja.toObject();
 
-    // If no photo in job posting, get from company profile
     if (!shpalljaObj.fotoProfili) {
       const photoUrl = await fetchCompanyPhoto(
         shpallja.emailKompanise,
